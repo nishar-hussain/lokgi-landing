@@ -137,43 +137,6 @@
   }
 }
 
-@keyframes stock-logo-spin {
-  0% {
-    opacity: 0;
-    transform: perspective(900px) rotateY(-90deg) scale(0.96);
-  }
-  18% {
-    opacity: 1;
-  }
-  50% {
-    transform: perspective(900px) rotateY(0deg) scale(1);
-  }
-  82% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    transform: perspective(900px) rotateY(90deg) scale(0.96);
-  }
-}
-
-.stock-logo-spin {
-  animation: stock-logo-spin 2s cubic-bezier(0.22, 1, 0.36, 1) both;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-  transform-origin: center center;
-}
-
-.stock-logo-frame {
-  position: absolute;
-  inset: 8% 10%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transform-origin: center;
-  will-change: transform;
-}
-
 .logo-marquee {
   overflow: hidden;
   width: 100%;
@@ -276,10 +239,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .stock-logo-spin {
-    animation: none;
-  }
-
   .logo-marquee-track {
     animation: none;
     width: 100%;

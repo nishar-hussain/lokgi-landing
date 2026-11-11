@@ -1,81 +1,60 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { ArrowUpRight, Send } from "lucide-react"
-import Image from "next/image"
+import { FormEvent, useState } from "react"
+import { Github } from "lucide-react"
 
 export default function ContactSection() {
-  const stockLogos = [
-    { src: "/images/nvidia-logo.jpeg", alt: "NVIDIA logo", name: "NVIDIA · NVDA", scale: 0.92 },
-    { src: "/images/tesla-logo.jpeg", alt: "Tesla logo", name: "Tesla · TSLA", scale: 1 },
-    { src: "/images/openai-logo.jpeg", alt: "OpenAI logo", name: "OpenAI · AI", scale: 1.05 },
-    { src: "/images/solana-logo.jpeg", alt: "Solana logo", name: "Solana · SOL", scale: 1.62 },
-  ]
-  const [activeLogo, setActiveLogo] = useState(0)
+  const [email, setEmail] = useState("")
+  const [submitted, setSubmitted] = useState(false)
 
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      setActiveLogo((current) => (current + 1) % stockLogos.length)
-    }, 2000)
-
-    return () => window.clearInterval(interval)
-  }, [stockLogos.length])
+  const onSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+    if (!email.includes("@")) return
+    setSubmitted(true)
+  }
 
   return (
-    <section id="contact" className="py-20 px-6">
-      <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div className="flex items-center gap-2 mb-4">
-          <Send className="w-5 h-5 text-accent" strokeWidth={2} />
-          <span className="text-sm font-medium text-foreground/70">YOUR TRADING DESK</span>
-        </div>
+    <section id="contact" className="bg-white px-4 py-6 md:px-6 md:py-8">
+      <div className="relative mx-auto min-h-[680px] overflow-hidden rounded-[2rem] md:min-h-[780px]">
+        <img
+          src="/images/slide-nyse-facade.jpg"
+          alt=""
+          className="absolute inset-0 h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/35" />
 
-          <p className="text-foreground/70 max-w-xl mb-12">
-            Execute demo trades on supported stock-linked claims. Enter your details, check the quote, and confirm with a Solana wallet signature.
-          </p>
-        {/* Contact Content */}
-        <div className="grid lg:grid-cols-2 gap-8">
-          {/* Image */}
-          <div className="relative min-h-[300px] overflow-hidden bg-white lg:min-h-[360px]">
-            <div
-              key={stockLogos[activeLogo].src}
-              className="stock-logo-frame"
-              style={{ transform: `scale(${stockLogos[activeLogo].scale})` }}
-            >
-              <Image
-                src={stockLogos[activeLogo].src}
-                alt={stockLogos[activeLogo].alt}
-                width={600}
-                height={500}
-                className="stock-logo-spin h-full w-full object-contain"
+        <div className="relative flex min-h-[680px] flex-col items-center justify-center px-6 py-24 text-center text-white md:min-h-[780px]">
+          {submitted ? (
+            <p className="text-lg text-white">You&apos;re on the list.</p>
+          ) : (
+            <form onSubmit={onSubmit} className="flex w-full max-w-xl flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
+              <label className="sr-only" htmlFor="desk-email">
+                Email
+              </label>
+              <input
+                id="desk-email"
+                type="email"
+                required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                placeholder="Email"
+                className="h-12 w-full rounded-full border border-white/10 bg-black/50 px-5 text-sm text-white outline-none backdrop-blur-md placeholder:text-white/55 sm:max-w-sm"
               />
-            </div>
-            <div className="absolute bottom-5 left-5 rounded-full bg-foreground px-4 py-2 text-sm font-medium text-background">
-              {stockLogos[activeLogo].name}
-            </div>
-          </div>
+              <button
+                type="submit"
+                className="h-12 shrink-0 rounded-full bg-white px-6 text-sm font-medium text-black transition-opacity hover:opacity-90"
+              >
+                Sign Up
+              </button>
+            </form>
+          )}
 
-          {/* Trading Desk */}
-          <div className="bg-card p-8 border-border rounded-none border-0">
-            <h3 className="mb-2 font-serif text-2xl text-foreground">Review your trade. Confirm onchain.</h3>
-            <p className="text-foreground/70 mb-8">
-              Execute demo trades on supported non-transferable claims against the Lokgi USDC vault. Every order preview shows the last official close, quantity, 0.10% platform fee, limits, and quote expiration.
-            </p>
-
-            <div className="space-y-4 border-y border-border py-6 text-sm text-foreground/70">
-              <p>Minimum order: $1 · Maximum order: $10,000</p>
-              <p>Daily notional limit: $25,000 · Quote lifetime: 60 seconds</p>
-              <p>Demo Mode: orders are simulated for demonstration. No real assets or live stock trades are executed.</p>
-            </div>
-
-            <a
-              href="https://app.lokgi.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition-opacity hover:opacity-90"
-            >
-              Open Trading Desk
-              <ArrowUpRight className="h-4 w-4" />
+          <div className="mt-12 flex items-center gap-6 text-white/80">
+            <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="lokgi on X" className="text-xl transition-colors hover:text-white">
+              𝕏
+            </a>
+            <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="lokgi on GitHub" className="transition-colors hover:text-white">
+              <Github size={20} />
             </a>
           </div>
         </div>
