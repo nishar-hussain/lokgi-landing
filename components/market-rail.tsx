@@ -24,7 +24,7 @@ const palette: RailAsset[] = [
 const assets: RailAsset[] = [...palette, ...palette, ...palette]
 assets.splice(6, 0, { ticker: "GLD", color: "#d4af37", gold: true })
 
-const AUTO = (-12.4 * Math.PI) / 180
+const AUTO = (-5.6 * Math.PI) / 180
 
 const stories = [
   {
@@ -188,21 +188,32 @@ export default function MarketRail() {
       })
     }
 
-    const paint = () => {
+    const paint = (now: number) => {
       const { count, step, r } = metrics
+      const t = now / 1000
       for (let index = 0; index < count; index += 1) {
         const card = cardsRef.current[index]
         if (!card) continue
         const theta = wrap(index * step + rotation.current)
         const shown = Math.abs(theta) < 1.22
         const closeness = Math.max(0, 1 - Math.abs(theta) / 0.72)
-        const scale = 1 + closeness * (assets[index]?.gold ? 0.16 : 0.08)
+        const gold = Boolean(assets[index]?.gold)
+        const breathe = reduced ? 0 : Math.sin(t * 1.35 + index * 0.45)
+        const lift = closeness * closeness * (26 + breathe * 10)
+        const pulse = reduced ? 1 : 1 + closeness * (0.05 + Math.sin(t * 2.1) * 0.04)
+        const scale = (1 + closeness * (gold ? 0.22 : 0.12)) * pulse
         const x = Math.sin(theta) * r
-        const y = (1 - Math.cos(theta)) * r
+        const y = (1 - Math.cos(theta)) * r - lift
+        const spin = theta + breathe * 0.045 * closeness
         card.style.visibility = shown ? "visible" : "hidden"
         card.style.zIndex = String(8 + Math.round(closeness * 24))
-        card.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) rotate(${theta}rad) scale(${scale})`
-        card.style.setProperty("--shine", `${(-theta / 1.22) * 42}`)
+        card.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) rotate(${spin}rad) scale(${scale})`
+        card.style.setProperty("--shine", `${(-theta / 1.22) * 86 + (reduced ? 0 : Math.sin(t * 0.9 + index) * 28)}`)
+        const face = card.firstElementChild as HTMLElement | null
+        if (face && gold) {
+          const glow = 0.4 + closeness * 0.6 + (reduced ? 0 : Math.sin(t * 2.6) * 0.22)
+          face.style.boxShadow = `0 22px 40px rgba(120,84,10,0.34), 0 0 ${18 + glow * 30}px rgba(255, 206, 84, ${0.2 + glow * 0.4})`
+        }
       }
     }
 
@@ -210,15 +221,15 @@ export default function MarketRail() {
       const dt = Math.min(0.032, (now - previous) / 1000)
       previous = now
       if (!dragging.current && !reduced) {
-        velocity.current += (AUTO - velocity.current) * (1 - Math.exp(-dt * 1.8))
+        velocity.current += (AUTO - velocity.current) * (1 - Math.exp(-dt * 0.7))
         rotation.current += velocity.current * dt
       }
-      paint()
+      paint(now)
       frame = window.requestAnimationFrame(loop)
     }
 
     measure()
-    paint()
+    paint(performance.now())
     frame = window.requestAnimationFrame(loop)
     window.addEventListener("resize", measure)
     return () => {
@@ -283,7 +294,7 @@ export default function MarketRail() {
               }}
             >
               <div
-                className="pointer-events-none absolute inset-y-[-10%] w-[55%] bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                className="pointer-events-none absolute inset-y-[-20%] w-[70%] bg-gradient-to-r from-transparent via-white/70 to-transparent"
                 style={{ transform: "translateX(calc(var(--shine) * 1.6%))" }}
               />
               <div

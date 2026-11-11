@@ -99,8 +99,8 @@ export default function About() {
     const tick = () => {
       frame = 0
       const target = readTarget()
-      const next = scenePos.current + (target - scenePos.current) * 0.16
-      scenePos.current = Math.abs(next - target) < 0.004 ? target : next
+      const next = scenePos.current + (target - scenePos.current) * 0.065
+      scenePos.current = Math.abs(next - target) < 0.002 ? target : next
       setVisual(scenePos.current)
       if (scenePos.current !== target) frame = window.requestAnimationFrame(tick)
     }
@@ -121,7 +121,7 @@ export default function About() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="about" className="relative h-[320vh]">
+    <section ref={sectionRef} id="about" className="relative h-[420vh]">
       <div className="sticky top-0 flex h-svh items-center overflow-hidden px-6 pb-8 pt-20">
         <div
           aria-hidden="true"
@@ -157,14 +157,14 @@ export default function About() {
             </div>
           </div>
 
-          <div className="flex justify-center lg:pr-4">
-            <div className="relative w-[min(52vw,210px)] drop-shadow-[0_22px_40px_rgba(0,0,0,0.16)] lg:w-[min(18vw,230px)]">
+          <div className="flex justify-center lg:pr-2">
+            <div className="phone-float relative aspect-[418/850] h-[min(70svh,640px)] w-auto drop-shadow-[0_28px_50px_rgba(0,0,0,0.18)]">
               <img
                 src="/images/iphone-frame.png"
                 alt=""
-                className="pointer-events-none relative z-10 block h-auto w-full select-none"
+                className="pointer-events-none relative z-10 block h-full w-full select-none"
               />
-              <div className="absolute inset-x-[5.8%] bottom-[2.5%] top-[7.6%] z-20 overflow-hidden rounded-[2.15rem] bg-white">
+              <div className="absolute inset-x-[5.8%] bottom-[2.5%] top-[7.6%] z-20 overflow-hidden rounded-[11%] bg-white">
                 <div className="flex h-full flex-col px-3.5 pt-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
@@ -198,7 +198,7 @@ export default function About() {
                         <p className="mt-0.5 text-[22px] font-semibold leading-none tracking-tight text-foreground">$198.42</p>
                         <p className="mt-1 text-[10px] leading-[1.35] text-foreground/45">{scene.note}</p>
 
-                        <svg viewBox="0 0 240 72" className="mt-1 h-5 w-full shrink-0" aria-hidden="true">
+                        <svg viewBox="0 0 240 72" className="mt-2 h-16 w-full shrink-0" aria-hidden="true">
                           <polyline
                             fill="none"
                             stroke="#111"
@@ -226,7 +226,7 @@ export default function About() {
                           </div>
                         </div>
 
-                        <ul className="mt-1.5 space-y-1 px-0.5">
+                        <ul className="mt-3 space-y-1.5 px-0.5">
                           {scene.steps.map((step) => (
                             <li key={step.label} className="flex items-center gap-2">
                               <span
@@ -248,7 +248,7 @@ export default function About() {
                   </div>
 
                   <div className="shrink-0 bg-white pb-3 pt-1.5">
-                    <div className="flex items-center justify-center gap-1.5 rounded-full bg-black px-3 py-2.5 text-[11px] font-medium leading-none text-white">
+                    <div className="sign-pulse flex items-center justify-center gap-1.5 rounded-full bg-black px-3 py-2.5 text-[11px] font-medium leading-none text-white">
                       <SolanaMark id="lokgi-solana-sign" className="h-3.5 w-3.5 shrink-0" />
                       Sign on Solana
                     </div>

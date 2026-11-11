@@ -199,6 +199,33 @@
   background: rgba(255, 255, 255, 0.35);
 }
 
+@keyframes phone-float {
+  0%, 100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+
+.phone-float {
+  animation: phone-float 6.8s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes sign-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(20, 241, 149, 0);
+  }
+  50% {
+    box-shadow: 0 8px 24px rgba(20, 241, 149, 0.55);
+  }
+}
+
+.sign-pulse {
+  animation: sign-pulse 2.6s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .market-flow-bar {
     animation: none;
@@ -233,6 +260,11 @@
     width: 100%;
     justify-content: center;
     flex-wrap: wrap;
+  }
+
+  .phone-float,
+  .sign-pulse {
+    animation: none;
   }
 
   .market-tape-track {
