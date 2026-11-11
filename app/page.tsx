@@ -4,7 +4,7 @@ import About from "@/components/about"
 import TokenizedFeatures from "@/components/tokenized-features"
 import SelectedWorks from "@/components/selected-works"
 import Services from "@/components/services"
-import Testimonials from "@/components/testimonials"
+import MarketRail from "@/components/market-rail"
 import ContactSection from "@/components/contact-section"
 import Stats from "@/components/stats"
 import MarketIndex from "@/components/market-index"
@@ -19,7 +19,7 @@ export default function Home() {
       <TokenizedFeatures />
       <SelectedWorks />
       <Services />
-      <Testimonials />
+      <MarketRail />
       <ContactSection />
       <Stats />
       <MarketIndex />

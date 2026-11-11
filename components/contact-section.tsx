@@ -36,7 +36,7 @@ export default function ContactSection() {
         {/* Contact Content */}
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Image */}
-          <div className="relative min-h-[420px] overflow-hidden bg-white lg:min-h-[500px]">
+          <div className="relative min-h-[300px] overflow-hidden bg-white lg:min-h-[360px]">
             <div
               key={stockLogos[activeLogo].src}
               className="stock-logo-frame"
@@ -57,7 +57,7 @@ export default function ContactSection() {
 
           {/* Trading Desk */}
           <div className="bg-card p-8 border-border rounded-none border-0">
-            <h3 className="text-2xl md:text-3xl font-serif text-foreground mb-2">Review your trade. Confirm onchain.</h3>
+            <h3 className="mb-2 font-serif text-2xl text-foreground">Review your trade. Confirm onchain.</h3>
             <p className="text-foreground/70 mb-8">
               Execute demo trades on supported non-transferable claims against the Lokgi USDC vault. Every order preview shows the last official close, quantity, 0.10% platform fee, limits, and quote expiration.
             </p>

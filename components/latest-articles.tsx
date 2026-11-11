@@ -28,7 +28,7 @@ const articles = [
 
 export default function LatestArticles() {
   return (
-    <section id="blog" className="bg-black px-6 py-24 text-white md:py-32">
+    <section id="blog" className="bg-black px-6 py-16 text-white md:py-20">
       <div className="mx-auto max-w-7xl">
         <div className="mb-14 flex flex-col justify-between gap-6 md:flex-row md:items-end">
           <div>
@@ -36,7 +36,7 @@ export default function LatestArticles() {
               <BookOpen className="h-5 w-5" strokeWidth={1.7} />
               <span className="text-sm font-medium uppercase tracking-[0.14em]">Learn before you trade</span>
             </div>
-            <h2 className="max-w-3xl text-4xl font-medium leading-[1.02] tracking-[-0.05em] md:text-6xl">Understand the market and the asset.</h2>
+            <h2 className="max-w-2xl text-3xl font-medium leading-[1.08] tracking-[-0.04em] md:text-4xl">Understand the market and the asset.</h2>
           </div>
           <p className="max-w-sm text-sm leading-6 text-white/55">Clear guides to official closing prices, onchain settlement, non-transferable claims, and the risks behind every trade.</p>
         </div>
@@ -60,7 +60,7 @@ export default function LatestArticles() {
                 </div>
                 <span className="grid h-8 w-8 place-items-center rounded-full border border-white/20 text-white/70 transition-colors group-hover:bg-white group-hover:text-black"><ArrowUpRight size={15} /></span>
               </div>
-              <h3 className="px-2 pb-4 pt-3 text-xl font-medium leading-7 text-white transition-colors group-hover:text-white/70">
+              <h3 className="px-2 pb-4 pt-3 text-lg font-medium leading-6 text-white transition-colors group-hover:text-white/70">
                 {article.title}
               </h3>
             </Link>

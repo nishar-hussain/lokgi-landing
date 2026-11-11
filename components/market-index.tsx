@@ -34,8 +34,8 @@ export default function MarketIndex() {
       <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] border border-white/10 bg-black text-white">
         <div className="grid lg:grid-cols-2">
           <div className="border-b border-white/15 p-7 md:p-10 lg:border-b-0 lg:border-r lg:p-12">
-            <p className="text-[clamp(4rem,9vw,7rem)] font-semibold leading-[0.8] tracking-[-0.1em]">100+</p>
-            <h2 className="mt-7 max-w-lg text-3xl font-medium leading-[0.98] tracking-[-0.06em] md:text-5xl">
+            <p className="text-[clamp(2.75rem,5vw,4.25rem)] font-semibold leading-[0.85] tracking-[-0.06em]">100+</p>
+            <h2 className="mt-5 max-w-lg text-2xl font-medium leading-[1.05] tracking-[-0.04em] md:text-4xl">
               familiar companies.<br />one clear view.
             </h2>
 
@@ -59,7 +59,7 @@ export default function MarketIndex() {
             </div>
           </div>
 
-          <div className="relative min-h-[520px] overflow-hidden p-8 md:p-12 lg:p-14">
+          <div className="relative min-h-[380px] overflow-hidden p-7 md:p-10">
             <div className="absolute inset-0 opacity-30 [background-image:linear-gradient(90deg,transparent_0,transparent_49%,rgba(255,255,255,.1)_50%,transparent_51%),linear-gradient(180deg,transparent_0,transparent_49%,rgba(255,255,255,.08)_50%,transparent_51%)] [background-size:160px_160px]" />
             <div aria-hidden="true" className="market-scan-line pointer-events-none absolute inset-y-0 left-0 w-px bg-white/40" />
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
@@ -78,14 +78,14 @@ export default function MarketIndex() {
             <div className="absolute right-8 top-0 h-3 w-14 rounded-b-full bg-white/80 md:right-14" />
             <div className="relative z-10 flex h-full flex-col p-1">
               <div className="flex items-start justify-between gap-6">
-                <h2 className="max-w-xl text-4xl font-semibold leading-[0.93] tracking-[-0.07em] md:text-6xl">
+                <h2 className="max-w-xl text-3xl font-semibold leading-[1.05] tracking-[-0.04em] md:text-4xl">
                   One market<br />reference.<br />Built onchain.
                 </h2>
                 <span className="hidden whitespace-nowrap text-right text-sm font-semibold uppercase tracking-[0.14em] text-white/50 sm:block">Lokgi<br />Markets</span>
               </div>
 
               <div className="mt-auto max-w-xl pt-16">
-                <p className="text-base leading-7 text-white/65 md:text-lg">
+                <p className="text-sm leading-6 text-white/65 md:text-base">
                   Explore US-listed companies, compare official closing prices, and discover which assets are available as supported claims on Solana.
                 </p>
                 <a href="#works" className="mt-7 inline-flex items-center gap-4 rounded-full bg-white px-5 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-black transition-transform hover:-translate-y-1">

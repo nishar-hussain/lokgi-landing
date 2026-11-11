@@ -2,11 +2,11 @@
 
 import { ArrowUpRight } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export default function Hero() {
   const [scrollProgress, setScrollProgress] = useState(0)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,6 +20,17 @@ export default function Hero() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    if (reduced) {
+      video.pause()
+      return
+    }
+    video.play().catch(() => {})
+  }, [])
+
   const scale = 1 - scrollProgress * 0.15 // Scale from 1 to 0.85
   const borderRadius = scrollProgress * 24 // Border radius from 0 to 24px
 
@@ -30,7 +41,7 @@ export default function Hero() {
           {/* Product introduction */}
           <div className="lg:max-w-3xl pt-0">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.14em] text-foreground/60">US MARKETS. ONCHAIN SETTLEMENT.</p>
-            <h1 className="leading-tight text-balance text-left font-sans font-semibold leading-7 tracking-tight text-accent text-5xl">
+            <h1 className="text-balance text-left font-sans text-4xl font-semibold leading-[1.08] tracking-tight text-accent md:text-[42px]">
               Discover US Stocks, Trade on Solana.
             </h1>
 
@@ -70,12 +81,16 @@ export default function Hero() {
             borderRadius: `${borderRadius}px`,
           }}
         >
-          <Image
-            src="/images/97ab9037-5842-4584-bc95-9fc90baece99.png"
-            alt="Lokgi dark-mode US stock market dashboard with charts and tickers"
-            width={1920}
-            height={600}
-            className="w-full h-auto object-cover"
+          <video
+            ref={videoRef}
+            src="/media/hero-sunrise.mp4"
+            className="h-auto w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+            aria-label="Sunrise over the mountains"
           />
 
         </div>
