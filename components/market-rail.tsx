@@ -2,7 +2,9 @@
 
 import { useEffect, useRef, type PointerEvent } from "react"
 
-const palette = [
+type RailAsset = { ticker: string; color: string; gold?: boolean }
+
+const palette: RailAsset[] = [
   { ticker: "AAPL", color: "#1d4e89" },
   { ticker: "MSFT", color: "#16325c" },
   { ticker: "NVDA", color: "#3c8c28" },
@@ -18,11 +20,11 @@ const palette = [
   { ticker: "ORCL", color: "#5b3d86" },
 ]
 
-// Three laps of the same set fill the circle at the same spacing as the reference arc.
-const assets = [...palette, ...palette, ...palette]
+// Three laps of the same set, plus one gilded card so it passes the crown once per turn.
+const assets: RailAsset[] = [...palette, ...palette, ...palette]
+assets.splice(6, 0, { ticker: "GLD", color: "#d4af37", gold: true })
 
-const STEP = (360 / assets.length) * (Math.PI / 180)
-const AUTO = (-14.2 * Math.PI) / 180
+const AUTO = (-12.4 * Math.PI) / 180
 
 const stories = [
   {
@@ -153,20 +155,21 @@ export default function MarketRail() {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     let frame = 0
     let previous = performance.now()
+    let metrics = { count: assets.length, step: 0, r: 900, cardSize: 160, origin: 120 }
 
-    const layout = () => {
+    const measure = () => {
       const stage = stageRef.current
       if (!stage) return
       const width = stage.clientWidth
       const narrow = width < 800
       const count = narrow ? 16 : assets.length
-      const step = (Math.PI * 2) / count
       const cardSize = narrow ? Math.min(96, width * 0.24) : Math.min(188, width * 0.1)
       const r = cardSize * (narrow ? 3.15 : 1335 / 187)
-      radius.current = r
       const origin = cardSize * 0.62 + (narrow ? 20 : 64)
       const edge = Math.asin(Math.min(0.98, (width * 0.52) / r))
       const height = origin + r * (1 - Math.cos(edge)) + cardSize * 0.58
+      metrics = { count, step: (Math.PI * 2) / count, r, cardSize, origin }
+      radius.current = r
       stage.style.height = `${Math.round(height)}px`
 
       const arc = arcRef.current
@@ -176,43 +179,51 @@ export default function MarketRail() {
         arc.style.top = `${origin + cardSize * 0.06}px`
       }
 
-      assets.forEach((_, index) => {
-        const card = cardsRef.current[index]
+      cardsRef.current.forEach((card, index) => {
         if (!card) return
-        if (index >= count) {
-          card.style.visibility = "hidden"
-          return
-        }
-        const theta = wrap(index * step + rotation.current)
-        const x = Math.sin(theta) * r
-        const y = (1 - Math.cos(theta)) * r
-        const shown = Math.abs(theta) < 1.25
         card.style.width = `${cardSize}px`
         card.style.height = `${cardSize}px`
-        card.style.transform = `translate(-50%, -50%) translate3d(${x}px, ${y}px, 0) rotate(${theta}rad)`
         card.style.top = `${origin}px`
-        card.style.zIndex = String(100 - Math.round(Math.abs(theta) * 40))
-        card.style.visibility = shown ? "visible" : "hidden"
+        if (index >= count) card.style.visibility = "hidden"
       })
     }
 
+    const paint = () => {
+      const { count, step, r } = metrics
+      for (let index = 0; index < count; index += 1) {
+        const card = cardsRef.current[index]
+        if (!card) continue
+        const theta = wrap(index * step + rotation.current)
+        const shown = Math.abs(theta) < 1.22
+        const closeness = Math.max(0, 1 - Math.abs(theta) / 0.72)
+        const scale = 1 + closeness * (assets[index]?.gold ? 0.16 : 0.08)
+        const x = Math.sin(theta) * r
+        const y = (1 - Math.cos(theta)) * r
+        card.style.visibility = shown ? "visible" : "hidden"
+        card.style.zIndex = String(120 + Math.round(closeness * 40))
+        card.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) rotate(${theta}rad) scale(${scale})`
+        card.style.setProperty("--shine", `${(-theta / 1.22) * 42}`)
+      }
+    }
+
     const loop = (now: number) => {
-      const dt = Math.min(0.05, (now - previous) / 1000)
+      const dt = Math.min(0.032, (now - previous) / 1000)
       previous = now
       if (!dragging.current && !reduced) {
-        velocity.current += (AUTO - velocity.current) * Math.min(1, dt * 2.2)
+        velocity.current += (AUTO - velocity.current) * (1 - Math.exp(-dt * 1.8))
         rotation.current += velocity.current * dt
       }
-      layout()
+      paint()
       frame = window.requestAnimationFrame(loop)
     }
 
-    layout()
+    measure()
+    paint()
     frame = window.requestAnimationFrame(loop)
-    window.addEventListener("resize", layout)
+    window.addEventListener("resize", measure)
     return () => {
       window.cancelAnimationFrame(frame)
-      window.removeEventListener("resize", layout)
+      window.removeEventListener("resize", measure)
     }
   }, [])
 
@@ -232,7 +243,7 @@ export default function MarketRail() {
     lastX.current = event.clientX
     const step = delta / radius.current
     rotation.current += step
-    velocity.current = step / dt
+    velocity.current = Math.max(-1.6, Math.min(1.6, step / dt))
   }
 
   const onPointerUp = () => {
@@ -261,17 +272,26 @@ export default function MarketRail() {
               cardsRef.current[index] = node
             }}
             aria-hidden="true"
-            className="absolute left-1/2 will-change-transform"
+            className="absolute left-1/2 will-change-transform [--shine:0]"
           >
             <div
-              className="relative h-full w-full overflow-hidden rounded-[12%] shadow-[0_16px_30px_rgba(20,24,40,0.16)]"
-              style={{ backgroundColor: asset.color }}
+              className={`relative h-full w-full overflow-hidden rounded-[12%] ${asset.gold ? "shadow-[0_18px_36px_rgba(120,84,10,0.32),inset_0_0_0_1px_rgba(255,236,170,0.7)]" : "shadow-[0_16px_30px_rgba(20,24,40,0.16)]"}`}
+              style={{
+                background: asset.gold
+                  ? "linear-gradient(145deg, #f8e7a2 0%, #e0bf55 22%, #a67c1d 48%, #f3d98a 62%, #8d6412 100%)"
+                  : asset.color,
+              }}
             >
+              <div
+                className="pointer-events-none absolute inset-y-[-10%] w-[55%] bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                style={{ transform: "translateX(calc(var(--shine) * 1.6%))" }}
+              />
               <div
                 className="absolute inset-0"
                 style={{
-                  background:
-                    "linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 42%, rgba(0,0,0,0.14) 100%)",
+                  background: asset.gold
+                    ? "linear-gradient(180deg, rgba(255,255,255,0.38) 0%, rgba(255,255,255,0) 40%, rgba(80,48,0,0.18) 100%)"
+                    : "linear-gradient(180deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0) 42%, rgba(0,0,0,0.14) 100%)",
                 }}
               />
               <svg className="absolute inset-[8%] h-[62%] w-[84%]" viewBox="0 0 100 78" aria-hidden="true">
@@ -290,7 +310,9 @@ export default function MarketRail() {
                   </g>
                 </g>
               </svg>
-              <span className="absolute bottom-[11%] left-[11%] text-[clamp(16px,1.7vw,28px)] font-semibold leading-none tracking-[-0.04em] text-white">
+              <span
+                className={`absolute bottom-[11%] left-[11%] text-[clamp(16px,1.7vw,28px)] font-semibold leading-none tracking-[-0.04em] ${asset.gold ? "text-[#3a2808]" : "text-white"}`}
+              >
                 {asset.ticker}
               </span>
             </div>
