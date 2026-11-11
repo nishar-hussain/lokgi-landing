@@ -35,7 +35,7 @@ export default function Hero() {
   const borderRadius = scrollProgress * 24 // Border radius from 0 to 24px
 
   return (
-    <section id="home" className="pt-28 pb-16">
+    <section id="home" className="pt-8 pb-16">
       <div className="px-6 mx-auto max-w-7xl">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           {/* Product introduction */}

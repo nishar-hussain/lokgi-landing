@@ -1,4 +1,5 @@
 import Header from "@/components/header"
+import MarketTape from "@/components/market-tape"
 import Hero from "@/components/hero"
 import About from "@/components/about"
 import TokenizedFeatures from "@/components/tokenized-features"
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
+      <MarketTape />
       <Hero />
       <About />
       <TokenizedFeatures />
