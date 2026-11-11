@@ -26,6 +26,7 @@ export default function Header() {
     { name: "HOW IT WORKS", href: "#services" },
     { name: "SOLANA", href: "#about" },
     { name: "FAQ", href: "#blog" },
+    { name: "DOCS", href: "/docs" },
   ]
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -60,16 +61,22 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors cursor-pointer"
-              >
-                {item.name}
-              </a>
-            ))}
+            {navItems.map((item) =>
+              item.href.startsWith("/") ? (
+                <Link key={item.name} href={item.href} className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
+                  {item.name}
+                </Link>
+              ) : (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  onClick={(e) => handleNavClick(e, item.href)}
+                  className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors cursor-pointer"
+                >
+                  {item.name}
+                </a>
+              ),
+            )}
           </nav>
 
           {/* CTA Button */}
@@ -93,16 +100,22 @@ export default function Header() {
         {mobileMenuOpen && (
           <div className="md:hidden pt-4 pb-6">
             <nav className="flex flex-col gap-4">
-              {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors cursor-pointer"
-                >
-                  {item.name}
-                </a>
-              ))}
+              {navItems.map((item) =>
+                item.href.startsWith("/") ? (
+                  <Link key={item.name} href={item.href} onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
+                    {item.name}
+                  </Link>
+                ) : (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    onClick={(e) => handleNavClick(e, item.href)}
+                    className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors cursor-pointer"
+                  >
+                    {item.name}
+                  </a>
+                ),
+              )}
               <a
                 href="https://app.lokgi.com"
                 target="_blank"

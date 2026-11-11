@@ -20,6 +20,7 @@ export default function Footer() {
         <div className="mt-20 flex flex-col gap-6 border-t border-white/20 py-8 text-sm text-white/65 md:mt-28 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
             <span>lokgi © 2026</span>
+            <Link href="/docs" className="transition-colors hover:text-white">Docs</Link>
             <Link href="/terms" className="transition-colors hover:text-white">Terms of Service</Link>
             <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
             <Link href="/risk-disclosure" className="transition-colors hover:text-white">Risk Disclosure</Link>
