@@ -27,7 +27,7 @@ const slides = [
       "Claims are priced in USDC against the Lokgi vault.",
     ],
     cta: "Review a quote",
-    href: "#contact",
+    href: "/docs/quotes",
     image: "/images/slide-tesla.jpg",
     alt: "Black and white portrait collage on a red and cream grid",
   },
@@ -86,7 +86,7 @@ export default function Services() {
         <div className="relative min-h-[520px] lg:min-h-0">
           {slides.map((slide, slideIndex) => {
             const active = slideIndex === index
-            const external = slide.href.startsWith("http")
+            const external = slide.href.startsWith("http") || slide.href.startsWith("/docs")
             return (
               <div
                 key={slide.title}

@@ -46,19 +46,13 @@ export default function Header() {
   }
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
-      <div
-        className={`mx-auto max-w-7xl transition-all duration-300 ${
-          scrolled
-            ? "mt-4 mx-4 px-6 py-2 shadow-lg bg-background/95 backdrop-blur-md rounded-lg"
-            : "px-6 py-4 bg-background/90 backdrop-blur-md mx-4"
-        }`}
-      >
-        <div className="flex items-center justify-between">
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div className={`border-b bg-background transition-shadow ${scrolled ? "border-black/10 shadow-sm" : "border-transparent"}`}>
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-5 md:px-6">
           {/* Logo */}
           <Link
             href="/"
-            className={`font-bold text-foreground transition-all duration-300 ${scrolled ? "text-xl" : "text-2xl"}`}
+            className="shrink-0 text-xl font-bold text-foreground"
           >
             <span className="flex items-center gap-2">
               <Image src="/images/logsi-mark.jpeg" alt="lokgi mark" width={30} height={30} className="h-7 w-7 rounded-md object-contain" />
@@ -67,7 +61,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
+          <nav className="hidden min-w-0 items-center gap-4 lg:flex xl:gap-6">
             {navItems.map((item) =>
               item.href.startsWith("/") ? (
                 <Link
@@ -75,7 +69,7 @@ export default function Header() {
                   href={item.href}
                   target={item.blank ? "_blank" : undefined}
                   rel={item.blank ? "noopener noreferrer" : undefined}
-                  className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors"
+                  className="whitespace-nowrap text-sm font-medium text-foreground/70 hover:text-accent transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -84,7 +78,7 @@ export default function Header() {
                   key={item.name}
                   href={sectionHref(item.href)}
                   onClick={(e) => handleNavClick(e, item.href)}
-                  className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors cursor-pointer"
+                  className="whitespace-nowrap text-sm font-medium text-foreground/70 hover:text-accent transition-colors cursor-pointer"
                 >
                   {item.name}
                 </a>
@@ -97,21 +91,21 @@ export default function Header() {
             href="https://app.lokgi.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 rounded-full border border-foreground px-5 py-2.5 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground hover:border-accent transition-colors cursor-pointer"
+            className="hidden shrink-0 items-center gap-2 rounded-full border border-foreground px-4 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-accent-foreground hover:border-accent transition-colors cursor-pointer lg:flex"
           >
             Explore platform
             <ArrowUpRight className="h-4 w-4" />
           </a>
 
           {/* Mobile Menu Button */}
-          <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden pt-4 pb-6">
+          <div className="px-5 pb-4 lg:hidden">
             <nav className="flex flex-col gap-4">
               {navItems.map((item) =>
                 item.href.startsWith("/") ? (

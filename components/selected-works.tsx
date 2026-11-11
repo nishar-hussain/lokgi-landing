@@ -8,16 +8,19 @@ const panels = [
     title: "Discover the companies behind the market",
     eyebrow: "US MARKET OVERVIEW · OFFICIAL CLOSE",
     body: "Explore US-listed companies, review historical price movements, and compare stock-market reference prices. Other companies remain reference-only until an onchain claim is available.",
+    href: "/docs",
   },
   {
     title: "Wallet-authorized settlement",
     eyebrow: "SOLANA MAINNET · SUPPORTED CLAIMS",
     body: "Connect a compatible Solana wallet and authorize supported buy or sell orders against the Lokgi USDC vault.",
+    href: "/docs/settlement",
   },
   {
     title: "Understand the claim",
     eyebrow: "NON-TRANSFERABLE · USDC VAULT · DISCLOSURES",
     body: "Lokgi claims are not company shares. Review the vault structure, price source, transfer restrictions, fees, limits, and demo status before trading.",
+    href: "/docs/vault",
   },
 ]
 
@@ -63,7 +66,7 @@ export default function SelectedWorks() {
                   <div className="min-h-0 overflow-hidden px-8 md:px-12">
                     <div className="max-w-3xl pb-12">
                       <p className="text-lg leading-8 text-[#52646b] transition-colors duration-500 group-hover:text-white/70">{panel.body}</p>
-                      <a href="#contact" className="mt-6 inline-flex items-center gap-3 rounded-md border border-[#238b79] px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-[#238b79] transition-colors duration-500 hover:opacity-80 group-hover:border-[#40d6b4] group-hover:bg-[#40d6b4] group-hover:text-[#102326]">
+                      <a href={panel.href} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-3 rounded-md border border-[#238b79] px-5 py-3 text-xs font-bold uppercase tracking-[0.13em] text-[#238b79] transition-colors duration-500 hover:opacity-80 group-hover:border-[#40d6b4] group-hover:bg-[#40d6b4] group-hover:text-[#102326]">
                         Explore details <ArrowRight size={18} />
                       </a>
                     </div>

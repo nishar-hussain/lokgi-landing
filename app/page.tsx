@@ -2,11 +2,9 @@ import Header from "@/components/header"
 import MarketTape from "@/components/market-tape"
 import Hero from "@/components/hero"
 import About from "@/components/about"
-import TokenizedFeatures from "@/components/tokenized-features"
 import SelectedWorks from "@/components/selected-works"
 import Services from "@/components/services"
 import MarketRail from "@/components/market-rail"
-import ContactSection from "@/components/contact-section"
 import Stats from "@/components/stats"
 import MarketIndex from "@/components/market-index"
 import Footer from "@/components/footer"
@@ -18,11 +16,9 @@ export default function Home() {
       <MarketTape />
       <Hero />
       <About />
-      <TokenizedFeatures />
+      <MarketRail />
       <SelectedWorks />
       <Services />
-      <MarketRail />
-      <ContactSection />
       <Stats />
       <MarketIndex />
       <Footer />

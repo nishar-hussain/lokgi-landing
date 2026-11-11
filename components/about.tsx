@@ -122,13 +122,13 @@ export default function About() {
 
   return (
     <section ref={sectionRef} id="about" className="relative h-[320vh]">
-      <div className="sticky top-0 flex h-svh items-center overflow-hidden px-6">
+      <div className="sticky top-0 flex h-svh items-center overflow-hidden px-6 pb-8 pt-20">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 bg-[linear-gradient(to_right,rgba(0,0,0,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:28px_28px] lg:block"
         />
 
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 pt-24 lg:grid-cols-2 lg:gap-16">
+        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
           <div>
             <div className="mb-6 flex items-center gap-2">
               <Info className="h-5 w-5 text-accent" strokeWidth={2} />
@@ -157,15 +157,15 @@ export default function About() {
             </div>
           </div>
 
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative w-[min(64vw,250px)] drop-shadow-[0_22px_40px_rgba(0,0,0,0.16)] lg:w-[min(22vw,270px)]">
+          <div className="flex justify-center lg:pr-4">
+            <div className="relative w-[min(52vw,210px)] drop-shadow-[0_22px_40px_rgba(0,0,0,0.16)] lg:w-[min(18vw,230px)]">
               <img
                 src="/images/iphone-frame.png"
                 alt=""
                 className="pointer-events-none relative z-10 block h-auto w-full select-none"
               />
               <div className="absolute inset-x-[5.8%] bottom-[2.5%] top-[7.6%] z-20 overflow-hidden rounded-[2.15rem] bg-white">
-                <div className="flex h-full flex-col px-3.5 pb-4 pt-2">
+                <div className="flex h-full flex-col px-3.5 pt-2">
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <SolanaMark id="lokgi-solana-header" className="h-7 w-7" />
@@ -174,12 +174,12 @@ export default function About() {
                         <p className="mt-1 text-[9px] leading-none text-foreground/45">Mainnet · Demo</p>
                       </div>
                     </div>
-                    <span className="rounded-full bg-black px-2 py-1 text-[9px] font-medium text-white">
+                    <span className="shrink-0 whitespace-nowrap rounded-full bg-black px-2 py-1 text-[9px] font-medium leading-none text-white">
                       8xK2…4fQa
                     </span>
                   </div>
 
-                  <div className="relative mt-3 min-h-0 flex-1">
+                  <div className="relative mt-2.5 min-h-0 flex-1 overflow-hidden">
                     {scenes.map((scene, index) => {
                       const opacity = Math.max(0, 1 - Math.abs(visual - index))
                       return (
@@ -189,20 +189,16 @@ export default function About() {
                         style={{ opacity }}
                         aria-hidden={opacity < 0.5}
                       >
-                        <div className="flex items-start justify-between gap-2">
-                          <div>
-                            <p className="text-[11px] font-medium text-foreground/45">AAPL · Apple</p>
-                            <p className="mt-0.5 text-[26px] font-semibold leading-none tracking-tight text-foreground">
-                              $198.42
-                            </p>
-                          </div>
-                          <span className="rounded-full bg-[#14F195]/20 px-2 py-1 text-[10px] font-semibold text-[#0a7a4b]">
+                        <div className="flex items-center justify-between gap-2">
+                          <p className="text-[11px] font-medium text-foreground/45">AAPL · Apple</p>
+                          <span className="shrink-0 whitespace-nowrap rounded-full bg-[#14F195]/20 px-1.5 py-1 text-[9px] font-semibold leading-none text-[#0a7a4b]">
                             {scene.status}
                           </span>
                         </div>
-                        <p className="mt-1 text-[10px] leading-4 text-foreground/45">{scene.note}</p>
+                        <p className="mt-0.5 text-[22px] font-semibold leading-none tracking-tight text-foreground">$198.42</p>
+                        <p className="mt-1 text-[10px] leading-[1.35] text-foreground/45">{scene.note}</p>
 
-                        <svg viewBox="0 0 240 72" className="mt-2 h-14 w-full shrink-0" aria-hidden="true">
+                        <svg viewBox="0 0 240 72" className="mt-1 h-5 w-full shrink-0" aria-hidden="true">
                           <polyline
                             fill="none"
                             stroke="#111"
@@ -213,47 +209,49 @@ export default function About() {
                           />
                         </svg>
 
-                        <div className="mt-1 rounded-2xl bg-white p-3 shadow-sm ring-1 ring-black/5">
-                          <div className="mb-2 flex items-center justify-between">
-                            <p className="text-[12px] font-semibold text-foreground">{scene.action}</p>
-                            <span className="text-[10px] text-foreground/40">0.10% fee</span>
+                        <div className="mt-1 rounded-2xl bg-white p-2 shadow-sm ring-1 ring-black/5">
+                          <div className="mb-1.5 flex items-center justify-between gap-2">
+                            <p className="text-[12px] font-semibold leading-none text-foreground">{scene.action}</p>
+                            <span className="shrink-0 text-[10px] text-foreground/40">0.10% fee</span>
                           </div>
-                          <div className="grid grid-cols-2 gap-2 text-[11px]">
-                            <div className="rounded-xl bg-[#f4f4f2] px-2.5 py-2">
-                              <p className="text-[9px] uppercase tracking-wide text-foreground/40">You pay</p>
-                              <p className="mt-0.5 font-semibold text-foreground">{scene.pay}</p>
+                          <div className="grid grid-cols-2 gap-1.5 text-[10px]">
+                            <div className="min-w-0 rounded-xl bg-[#f4f4f2] px-1 py-1.5">
+                              <p className="text-[8px] uppercase tracking-wide text-foreground/40">You pay</p>
+                              <p className="mt-0.5 font-semibold leading-tight text-foreground">{scene.pay}</p>
                             </div>
-                            <div className="rounded-xl bg-[#f4f4f2] px-2.5 py-2">
-                              <p className="text-[9px] uppercase tracking-wide text-foreground/40">You receive</p>
-                              <p className="mt-0.5 font-semibold text-foreground">{scene.receive}</p>
+                            <div className="min-w-0 rounded-xl bg-[#f4f4f2] px-1 py-1.5">
+                              <p className="text-[8px] uppercase tracking-wide text-foreground/40">You receive</p>
+                              <p className="mt-0.5 font-semibold leading-tight text-foreground">{scene.receive}</p>
                             </div>
                           </div>
                         </div>
 
-                        <ul className="mt-2.5 space-y-1.5 px-0.5">
+                        <ul className="mt-1.5 space-y-1 px-0.5">
                           {scene.steps.map((step) => (
                             <li key={step.label} className="flex items-center gap-2">
                               <span
-                                className={`flex h-3.5 w-3.5 items-center justify-center rounded-full ${
+                                className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full ${
                                   step.done ? "bg-black text-white" : "border border-foreground/25"
                                 }`}
                               >
                                 {step.done ? <Check className="h-2 w-2" strokeWidth={3} /> : null}
                               </span>
-                              <span className={`text-[11px] ${step.done ? "text-foreground" : "text-foreground/40"}`}>
+                              <span className={`text-[10px] leading-tight ${step.done ? "text-foreground" : "text-foreground/40"}`}>
                                 {step.label}
                               </span>
                             </li>
                           ))}
                         </ul>
-
-                        <div className="mt-auto flex items-center justify-center gap-1.5 rounded-full bg-black py-2.5 text-[11px] font-medium text-white">
-                          <SolanaMark id={`lokgi-solana-${scene.id}`} className="h-4 w-4" />
-                          Sign on Solana
-                        </div>
                       </div>
                       )
                     })}
+                  </div>
+
+                  <div className="shrink-0 bg-white pb-3 pt-1.5">
+                    <div className="flex items-center justify-center gap-1.5 rounded-full bg-black px-3 py-2.5 text-[11px] font-medium leading-none text-white">
+                      <SolanaMark id="lokgi-solana-sign" className="h-3.5 w-3.5 shrink-0" />
+                      Sign on Solana
+                    </div>
                   </div>
                 </div>
               </div>

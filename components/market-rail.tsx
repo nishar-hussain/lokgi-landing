@@ -200,7 +200,7 @@ export default function MarketRail() {
         const x = Math.sin(theta) * r
         const y = (1 - Math.cos(theta)) * r
         card.style.visibility = shown ? "visible" : "hidden"
-        card.style.zIndex = String(120 + Math.round(closeness * 40))
+        card.style.zIndex = String(8 + Math.round(closeness * 24))
         card.style.transform = `translate3d(calc(-50% + ${x}px), calc(-50% + ${y}px), 0) rotate(${theta}rad) scale(${scale})`
         card.style.setProperty("--shine", `${(-theta / 1.22) * 42}`)
       }
