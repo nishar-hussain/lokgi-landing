@@ -20,13 +20,13 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  const navItems = [
+  const navItems: { name: string; href: string; blank?: boolean }[] = [
     { name: "HOME", href: "#home" },
     { name: "MARKET", href: "#works" },
     { name: "HOW IT WORKS", href: "#services" },
     { name: "SOLANA", href: "#about" },
     { name: "FAQ", href: "#blog" },
-    { name: "DOCS", href: "/docs" },
+    { name: "DOCS", href: "/docs", blank: true },
   ]
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -63,7 +63,13 @@ export default function Header() {
           <nav className="hidden md:flex items-center gap-8">
             {navItems.map((item) =>
               item.href.startsWith("/") ? (
-                <Link key={item.name} href={item.href} className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  target={item.blank ? "_blank" : undefined}
+                  rel={item.blank ? "noopener noreferrer" : undefined}
+                  className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors"
+                >
                   {item.name}
                 </Link>
               ) : (
@@ -102,7 +108,14 @@ export default function Header() {
             <nav className="flex flex-col gap-4">
               {navItems.map((item) =>
                 item.href.startsWith("/") ? (
-                  <Link key={item.name} href={item.href} onClick={() => setMobileMenuOpen(false)} className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors">
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    target={item.blank ? "_blank" : undefined}
+                    rel={item.blank ? "noopener noreferrer" : undefined}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors"
+                  >
                     {item.name}
                   </Link>
                 ) : (
