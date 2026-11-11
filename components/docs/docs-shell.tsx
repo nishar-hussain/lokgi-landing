@@ -59,9 +59,6 @@ export default function DocsShell({ children }: { children: React.ReactNode }) {
           <Link href="/docs" className="border-b-2 border-white pb-2 font-medium text-white">
             Documentation
           </Link>
-          <Link href="/" className="pb-2 text-white/45 hover:text-white">
-            Website
-          </Link>
         </div>
       </header>
 

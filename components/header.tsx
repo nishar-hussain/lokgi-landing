@@ -5,9 +5,11 @@ import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
+import { usePathname } from "next/navigation"
 import { Menu, X, ArrowUpRight } from "lucide-react"
 
 export default function Header() {
+  const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -26,15 +28,20 @@ export default function Header() {
     { name: "HOW IT WORKS", href: "#services" },
     { name: "SOLANA", href: "#about" },
     { name: "FAQ", href: "#blog" },
+    { name: "STAKE", href: "/stake" },
     { name: "DOCS", href: "/docs", blank: true },
   ]
 
+  const sectionHref = (href: string) => (pathname === "/" ? href : `/${href}`)
+
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
     const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth", block: "start" })
+    if (!element) {
+      setMobileMenuOpen(false)
+      return
     }
+    e.preventDefault()
+    element.scrollIntoView({ behavior: "smooth", block: "start" })
     setMobileMenuOpen(false)
   }
 
@@ -75,7 +82,7 @@ export default function Header() {
               ) : (
                 <a
                   key={item.name}
-                  href={item.href}
+                  href={sectionHref(item.href)}
                   onClick={(e) => handleNavClick(e, item.href)}
                   className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors cursor-pointer"
                 >
@@ -121,7 +128,7 @@ export default function Header() {
                 ) : (
                   <a
                     key={item.name}
-                    href={item.href}
+                    href={sectionHref(item.href)}
                     onClick={(e) => handleNavClick(e, item.href)}
                     className="text-sm font-medium text-foreground/70 hover:text-accent transition-colors cursor-pointer"
                   >

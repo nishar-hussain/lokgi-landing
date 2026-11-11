@@ -14,16 +14,15 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contact" className="bg-white px-4 py-6 md:px-6 md:py-8">
-      <div className="relative mx-auto min-h-[680px] overflow-hidden rounded-[2rem] md:min-h-[780px]">
-        <img
-          src="/images/slide-nyse-facade.jpg"
-          alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center"
-        />
-        <div className="absolute inset-0 bg-black/35" />
+    <section id="contact" className="relative h-svh w-full overflow-hidden bg-black">
+      <img
+        src="/images/slide-nyse-facade.jpg"
+        alt=""
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+      <div className="absolute inset-0 bg-black/35" />
 
-        <div className="relative flex min-h-[680px] flex-col items-center justify-center px-6 py-24 text-center text-white md:min-h-[780px]">
+      <div className="relative flex h-full flex-col items-center justify-center px-6 text-center text-white">
           {submitted ? (
             <p className="text-lg text-white">You&apos;re on the list.</p>
           ) : (
@@ -57,7 +56,6 @@ export default function ContactSection() {
               <Github size={20} />
             </a>
           </div>
-        </div>
       </div>
     </section>
   )
