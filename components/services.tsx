@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState, type ReactNode } from "react"
+import { useEffect, useState } from "react"
 import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 
@@ -15,7 +15,8 @@ const slides = [
     ],
     cta: "Explore markets",
     href: "#works",
-    media: "sunrise",
+    image: "/images/slide-bull.jpg",
+    alt: "Low-poly black bull standing on a gold coin",
   },
   {
     eyebrow: "Pricing",
@@ -27,7 +28,8 @@ const slides = [
     ],
     cta: "Review a quote",
     href: "#contact",
-    media: "phone",
+    image: "/images/slide-tesla.jpg",
+    alt: "Black and white portrait collage on a red and cream grid",
   },
   {
     eyebrow: "Solana",
@@ -39,7 +41,8 @@ const slides = [
     ],
     cta: "See the flow",
     href: "#about",
-    media: "settlement",
+    image: "/images/slide-capitol.jpg",
+    alt: "Capitol building with Apple, Google, and Nvidia marks",
   },
   {
     eyebrow: "Holdings",
@@ -51,7 +54,8 @@ const slides = [
     ],
     cta: "Open the desk",
     href: "https://app.lokgi.com",
-    media: "portfolio",
+    image: "/images/slide-nyse.jpg",
+    alt: "New York Stock Exchange facade with an American flag",
   },
 ] as const
 
@@ -145,121 +149,17 @@ export default function Services() {
         </div>
 
         <div className="relative min-h-[420px] overflow-hidden bg-[#0e0e0e] lg:min-h-0">
-          <Media name="sunrise" active={slides[index].media === "sunrise"}>
-            <video
-              src="/media/hero-sunrise.mp4"
-              className="h-full w-full object-cover"
-              autoPlay
-              muted
-              loop
-              playsInline
+          {slides.map((slide, slideIndex) => (
+            <img
+              key={slide.image}
+              src={slide.image}
+              alt={slide.alt}
+              className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${slideIndex === index ? "opacity-100" : "pointer-events-none opacity-0"}`}
             />
-          </Media>
-          <Media name="phone" active={slides[index].media === "phone"}>
-            <PhoneSlide />
-          </Media>
-          <Media name="settlement" active={slides[index].media === "settlement"}>
-            <SettlementSlide />
-          </Media>
-          <Media name="portfolio" active={slides[index].media === "portfolio"}>
-            <PortfolioSlide />
-          </Media>
+          ))}
         </div>
       </div>
     </section>
   )
 }
 
-function Media({ active, children }: { name: string; active: boolean; children: ReactNode }) {
-  return (
-    <div
-      className={`absolute inset-0 transition-opacity duration-700 ${active ? "opacity-100" : "pointer-events-none opacity-0"}`}
-      aria-hidden={!active}
-    >
-      {children}
-    </div>
-  )
-}
-
-function PhoneSlide() {
-  return (
-    <div className="flex h-full items-end justify-center bg-[#1b1b1b] pt-10">
-      <div className="relative w-[min(70%,280px)] translate-y-8">
-        <img src="/images/iphone-frame.png" alt="" className="relative z-10 block h-auto w-full" />
-        <div className="absolute inset-x-[6%] bottom-[3%] top-[8%] z-20 overflow-hidden rounded-[1.6rem] bg-[#111] text-white">
-          <div className="px-4 pb-4 pt-6">
-            <div className="flex items-center justify-between text-[10px] text-white/50">
-              <span>AAPL · Apple</span>
-              <span>Official close</span>
-            </div>
-            <p className="mt-2 text-3xl font-semibold tracking-tight">$198.42</p>
-            <div className="mt-4 space-y-2 text-[11px]">
-              <div className="flex justify-between rounded-lg bg-white/10 px-3 py-2">
-                <span className="text-white/50">You pay</span>
-                <span>100 USDC</span>
-              </div>
-              <div className="flex justify-between rounded-lg bg-white/10 px-3 py-2">
-                <span className="text-white/50">You receive</span>
-                <span>0.504 AAPL</span>
-              </div>
-            </div>
-            <div className="mt-4 rounded-full bg-white py-2 text-center text-[11px] font-medium text-black">
-              Review quote
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-function SettlementSlide() {
-  return (
-    <div className="flex h-full items-center justify-center bg-[#101410] p-8">
-      <div className="w-full max-w-sm rounded-2xl border border-white/10 bg-[#171c18] p-6">
-        <p className="text-xs uppercase tracking-[0.16em] text-white/45">Solana · Demo</p>
-        <p className="mt-3 text-2xl font-medium tracking-tight">Wallet signature</p>
-        <ul className="mt-5 space-y-3 text-sm text-white/70">
-          <li className="flex items-center justify-between border-b border-white/10 pb-3">
-            <span>Order prepared</span>
-            <span className="text-white">Ready</span>
-          </li>
-          <li className="flex items-center justify-between border-b border-white/10 pb-3">
-            <span>Fee</span>
-            <span className="text-white">0.10%</span>
-          </li>
-          <li className="flex items-center justify-between">
-            <span>Program check</span>
-            <span className="text-white">Verified</span>
-          </li>
-        </ul>
-      </div>
-    </div>
-  )
-}
-
-function PortfolioSlide() {
-  const rows = [
-    ["AAPL", "0.504", "+1.8%"],
-    ["MSFT", "0.210", "+0.6%"],
-    ["NVDA", "0.080", "+3.1%"],
-    ["USDC", "1,240", "Cash"],
-  ]
-  return (
-    <div className="flex h-full items-center justify-center bg-[#121212] p-8">
-      <div className="w-full max-w-sm">
-        <p className="text-xs uppercase tracking-[0.16em] text-white/45">Holdings</p>
-        <p className="mt-2 text-3xl font-medium tracking-tight">$1,438.20</p>
-        <div className="mt-6 divide-y divide-white/10">
-          {rows.map(([ticker, amount, change]) => (
-            <div key={ticker} className="flex items-center justify-between py-3 text-sm">
-              <span className="font-medium">{ticker}</span>
-              <span className="text-white/70">{amount}</span>
-              <span className="text-white/55">{change}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
