@@ -41,7 +41,7 @@ export default function Hero() {
           {/* Product introduction */}
           <div className="lg:max-w-3xl pt-0">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.14em] text-foreground/60">US MARKETS. ONCHAIN SETTLEMENT.</p>
-            <h1 className="text-balance text-left font-sans text-4xl font-semibold leading-[1.08] tracking-tight text-accent md:text-[42px]">
+            <h1 className="text-balance text-left text-4xl font-medium leading-[1.02] tracking-[-0.04em] text-accent md:text-[42px]">
               Discover US Stocks, Trade on Solana.
             </h1>
 

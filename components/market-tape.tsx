@@ -40,7 +40,7 @@ function Quote({ symbol, price, change }: { symbol: string; price: number; chang
 export default function MarketTape() {
   const items = [...tape, ...tape]
   return (
-    <div className="mt-[5.25rem] overflow-hidden bg-black text-white" aria-label="Sample market tape">
+    <div data-header="dark" className="mt-[5.25rem] overflow-hidden bg-black text-white" aria-label="Sample market tape">
       <div className="market-tape-track gap-8 py-2.5 pr-8">
         {items.map((quote, index) => (
           <Quote key={`${quote.symbol}-${index}`} {...quote} />

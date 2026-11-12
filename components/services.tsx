@@ -78,6 +78,7 @@ export default function Services() {
   return (
     <section
       id="services"
+      data-header="dark"
       className="bg-[#161616] text-white"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
@@ -94,7 +95,7 @@ export default function Services() {
                 aria-hidden={!active}
               >
                 <p className="text-xs font-medium uppercase tracking-[0.16em] text-white/55">{slide.eyebrow}</p>
-                <h2 className="mt-4 max-w-md text-4xl font-medium leading-[1.05] tracking-[-0.03em] md:text-5xl">
+                <h2 className="mt-4 max-w-md text-4xl font-medium leading-[1.02] tracking-[-0.04em] md:text-5xl">
                   {slide.title}
                 </h2>
                 <ul className="mt-6 max-w-md space-y-3 text-sm leading-6 text-white/75">

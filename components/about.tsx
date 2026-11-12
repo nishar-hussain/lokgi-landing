@@ -135,7 +135,7 @@ export default function About() {
               <span className="text-sm font-medium text-foreground/70">ASSET STRUCTURE</span>
             </div>
 
-            <h2 className="text-balance font-serif text-3xl leading-tight text-foreground md:text-[34px]">
+            <h2 className="text-balance text-3xl font-medium leading-[1.02] tracking-[-0.04em] text-foreground md:text-[34px]">
               Know exactly what you hold.
             </h2>
 

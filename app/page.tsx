@@ -7,6 +7,7 @@ import Services from "@/components/services"
 import MarketRail from "@/components/market-rail"
 import Stats from "@/components/stats"
 import MarketIndex from "@/components/market-index"
+import Questions from "@/components/questions"
 import Footer from "@/components/footer"
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <Services />
       <Stats />
       <MarketIndex />
+      <Questions />
       <Footer />
     </main>
   )

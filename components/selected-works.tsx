@@ -35,7 +35,7 @@ export default function SelectedWorks() {
             <Briefcase className="h-6 w-6 text-accent" strokeWidth={2} />
             <span className="text-sm font-medium uppercase tracking-[0.14em] text-foreground/70">MARKET EXPLORER · LAST OFFICIAL CLOSE</span>
           </div>
-          <h2 className="max-w-4xl text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-foreground md:text-5xl">
+          <h2 className="max-w-4xl text-4xl font-medium leading-[1.02] tracking-[-0.04em] text-foreground md:text-5xl">
             Explore US stocks with context.
           </h2>
         </div>

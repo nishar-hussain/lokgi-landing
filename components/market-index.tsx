@@ -30,12 +30,12 @@ function getLogoUrl(symbol: string) {
 
 export default function MarketIndex() {
   return (
-    <section id="market-index" className="bg-black px-6 py-12 text-white md:py-20">
+    <section id="market-index" data-header="dark" className="bg-black px-6 py-12 text-white md:py-20">
       <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] border border-white/10 bg-black text-white">
         <div className="grid lg:grid-cols-2">
           <div className="border-b border-white/15 p-7 md:p-10 lg:border-b-0 lg:border-r lg:p-12">
-            <p className="text-[clamp(2.75rem,5vw,4.25rem)] font-semibold leading-[0.85] tracking-[-0.06em]">100+</p>
-            <h2 className="mt-5 max-w-lg text-2xl font-medium leading-[1.05] tracking-[-0.04em] md:text-4xl">
+            <p className="text-[clamp(4.5rem,8vw,7.5rem)] font-medium leading-[0.85] tracking-[-0.06em]">100+</p>
+            <h2 className="mt-5 max-w-lg text-3xl font-medium leading-[1.02] tracking-[-0.04em] md:text-5xl">
               familiar companies.<br />one clear view.
             </h2>
 
@@ -78,7 +78,7 @@ export default function MarketIndex() {
             <div className="absolute right-8 top-0 h-3 w-14 rounded-b-full bg-white/80 md:right-14" />
             <div className="relative z-10 flex h-full flex-col p-1">
               <div className="flex items-start justify-between gap-6">
-                <h2 className="max-w-xl text-3xl font-semibold leading-[1.05] tracking-[-0.04em] md:text-4xl">
+                <h2 className="max-w-xl text-4xl font-medium leading-[1.02] tracking-[-0.04em] md:text-5xl lg:text-6xl">
                   One market<br />reference.<br />Built onchain.
                 </h2>
                 <span className="hidden whitespace-nowrap text-right text-sm font-semibold uppercase tracking-[0.14em] text-white/50 sm:block">Lokgi<br />Markets</span>

@@ -332,7 +332,7 @@ export default function MarketRail() {
       </div>
 
       <div className="relative z-10 mx-auto mt-8 max-w-[1440px] px-5 md:mt-12 lg:px-[60px]">
-        <h2 className="text-[28px] font-normal leading-none tracking-[-0.02em] text-[#03060D] md:text-[36px]">
+        <h2 className="text-[28px] font-medium leading-[1.02] tracking-[-0.04em] text-[#03060D] md:text-[36px]">
           From the close to the claim.
         </h2>
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
