@@ -316,7 +316,7 @@ export default function StakeDesk() {
             <Link href="/docs" target="_blank" rel="noopener noreferrer" className="hover:text-white">Docs</Link>
             <Link href="/risk-disclosure" className="hover:text-white">Risk disclosure</Link>
           </div>
-          <p className="max-w-xl text-xs leading-5">Lokgi is an educational demo. This stake view does not lock tokens, pay rewards, or trade the charted pair.</p>
+          <p className="max-w-xl text-xs leading-5">This stake view is a preview. It does not lock tokens, pay rewards, or trade the charted pair.</p>
         </div>
       </footer>
     </div>

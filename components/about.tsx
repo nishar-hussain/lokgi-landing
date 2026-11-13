@@ -140,7 +140,7 @@ export default function About() {
             </h2>
 
             <p className="mt-5 max-w-xl text-foreground/70">
-              A Lokgi token is a frozen, non-transferable claim against USDC held in the Lokgi Solana vault.
+              A Lokgi claim records USDC in the vault against that name, at the close used for the order. The token stays frozen in the wallet that holds it.
             </p>
 
             <div className="mt-8 flex items-center gap-2" aria-hidden="true">
@@ -171,7 +171,7 @@ export default function About() {
                       <SolanaMark id="lokgi-solana-header" className="h-7 w-7" />
                       <div>
                         <p className="text-[12px] font-semibold leading-none text-foreground">Solana</p>
-                        <p className="mt-1 text-[9px] leading-none text-foreground/45">Mainnet · Demo</p>
+                        <p className="mt-1 text-[9px] leading-none text-foreground/45">Devnet · USDC</p>
                       </div>
                     </div>
                     <span className="shrink-0 whitespace-nowrap rounded-full bg-black px-2 py-1 text-[9px] font-medium leading-none text-white">

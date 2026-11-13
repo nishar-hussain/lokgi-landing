@@ -4,7 +4,7 @@ import DocsShell from "@/components/docs/docs-shell"
 
 export const metadata: Metadata = {
   title: "Lokgi Docs",
-  description: "Guides for Lokgi claims, official closes, wallet settlement, and demo trading on Solana.",
+  description: "How the Lokgi desk prices a US close, settles a frozen claim on Solana devnet, and books the fill.",
 }
 
 export default function DocsLayout({ children }: { children: ReactNode }) {

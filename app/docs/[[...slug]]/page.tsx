@@ -1,4 +1,4 @@
-import { notFound } from "next/navigation"
+import { notFound, redirect } from "next/navigation"
 import DocArticle from "@/components/docs/doc-article"
 import { docNeighbors, docs, getDoc } from "@/lib/docs"
 
@@ -18,6 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
 export default async function DocsPage({ params }: { params: Promise<Params> }) {
   const { slug = [] } = await params
   const key = slug.join("/")
+  if (key === "demo") redirect("/docs/devnet")
   const doc = getDoc(key)
   if (!doc) notFound()
   const { prev, next } = docNeighbors(key)

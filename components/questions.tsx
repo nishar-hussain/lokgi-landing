@@ -7,31 +7,31 @@ import { ChevronDown } from "lucide-react"
 const questions = [
   {
     q: "What is Lokgi?",
-    a: "Lokgi is a Solana-based US equity reference desk and an educational demo, not a brokerage. You can explore US-listed companies and review frozen, non-transferable claims against a USDC vault.",
+    a: "Lokgi is a reference desk for US-listed companies. You look up a ticker, see a price from the official market close, and can buy or sell a frozen claim on a USDC vault. Settlement is on Solana devnet. Lokgi is not a broker, an exchange, a custodian, or an adviser.",
   },
   {
     q: "What is a Lokgi claim?",
-    a: "A claim is a frozen, non-transferable token against USDC held in the Lokgi Solana vault. Buying sends USDC in and mints the claim. Selling burns the claim back to USDC.",
+    a: "A claim is a record that the vault holds USDC against that name, at the close Lokgi used. Buying sends devnet USDC in and mints the claim. Selling burns the claim and returns USDC from the vault. The token is frozen, so it cannot be sent to another wallet.",
   },
   {
     q: "Does Lokgi hold the stock?",
-    a: "No. The claim is against USDC in the vault. You do not receive company ownership, voting rights, dividends, or a right to the shares.",
+    a: "No. You do not receive a share of Apple, Microsoft, or any other company. A claim carries no dividend, no vote, and no right to the underlying stock. An order does not print a trade on Nasdaq or the NYSE.",
   },
   {
     q: "What does an order cost?",
-    a: "The platform fee is 0.10%. Orders are priced in USDC at the latest official close. The minimum is $1, the maximum is $10,000, daily notional is $25,000, and a quote lasts 60 seconds.",
+    a: "The fee is 0.10%. Amounts are calculated in micro-units and the remainder is truncated. An order must be at least $1 and at most $10,000, with a $25,000 cap per account per UTC day. The preview is valid for 60 seconds. You also pay the Solana network fee in devnet SOL.",
   },
   {
     q: "Which names can I trade?",
-    a: "24 names are supported as onchain claims. Other US-listed companies stay reference-only until a claim is available.",
+    a: "Twenty-four large companies, including Apple, Microsoft, and NVIDIA, have a Lokgi mint and an order ticket. Thousands of other US symbols can be searched. A reference listing shows a price and a chart, and no way to place an order.",
   },
   {
-    q: "What happens in demo mode?",
-    a: "You can connect a wallet, review a quote, and walk through authorization. Demo orders are simulated. They do not buy or sell shares or execute a live stock trade.",
+    q: "Where does the price come from?",
+    a: "From the latest completed US regular session, 9:30 to 16:00 New York time, including holidays and early closes. A fresh close is labelled as the last official close. If the price source does not answer, the desk shows the last saved close and replaces the percent move with “Change unavailable.”",
   },
   {
-    q: "How do I authorize an order?",
-    a: "Lokgi prepares the order and shows the quote. Your wallet signs it. The Solana program verifies it before confirmation. Lokgi never asks for a seed phrase.",
+    q: "How do I sign in and trade?",
+    a: "Enter an email and a six-digit code. Then connect Phantom or Solflare and sign a message that names the wallet and a one-time nonce. That signature does not move funds. On a trade, the desk prepares the transaction, your wallet signs it, and the program checks the price before USDC moves. Lokgi never asks for a seed phrase.",
   },
 ]
 

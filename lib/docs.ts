@@ -20,72 +20,62 @@ export type DocPage = {
 }
 
 export const docsNav: { title: string; slugs: string[] }[] = [
-  { title: "Getting Started", slugs: ["", "demo", "how-it-works"] },
-  { title: "Pricing", slugs: ["official-close", "quotes"] },
+  { title: "Getting started", slugs: ["", "sign-in", "how-it-works"] },
+  { title: "Market", slugs: ["market", "official-close", "quotes"] },
   { title: "Claims", slugs: ["vault", "restrictions", "rights"] },
-  { title: "Solana", slugs: ["wallet", "settlement", "holdings"] },
+  { title: "Trading", slugs: ["orders", "settlement", "holdings"] },
+  { title: "Reference", slugs: ["wallet", "devnet", "records"] },
   { title: "Legal", slugs: ["risks"] },
 ]
 
 export const docs: DocPage[] = [
   {
     slug: "",
-    group: "Getting Started",
-    title: "Lokgi Docs",
-    description: "Guides for exploring US stocks, official closes, and frozen claims settled on Solana.",
+    group: "Getting started",
+    title: "Lokgi",
+    description: "A reference desk for US-listed companies, with settlement on Solana devnet.",
     sections: [
       {
-        id: "products",
-        title: "Products",
-        blocks: [
-          {
-            type: "p",
-            text: "Lokgi is a Solana-based US equity reference desk. You can review US-listed companies and their latest official closing prices, then buy or sell a supported claim against USDC held in the Lokgi vault.",
-          },
-          {
-            type: "note",
-            title: "Demo mode",
-            text: "The current desk is a demonstration. Orders are simulated. No real assets or live stock trades are executed. A Lokgi claim is not a share in the referenced company.",
-          },
-          {
-            type: "cards",
-            items: [
-              { href: "/docs/official-close", title: "Official close", text: "Every order uses the latest completed US regular-session close, shown before you sign." },
-              { href: "/docs/vault", title: "Vault claim", text: "A frozen, non-transferable claim against USDC in the Lokgi Solana vault." },
-              { href: "/docs/wallet", title: "Wallet settlement", text: "Lokgi prepares the order. You authorize it. The Solana program verifies it." },
-              { href: "/docs/holdings", title: "Holdings", text: "Review USDC balances, claim quantities, cost basis, and transaction history." },
-            ],
-          },
-        ],
-      },
-      {
-        id: "what-lokgi-is",
+        id: "what-it-is",
         title: "What Lokgi is",
         blocks: [
           {
             type: "p",
-            text: "The directory covers a broader set of US-listed companies for reference. Only 24 names are available as supported claims. Other companies stay reference-only until an onchain claim is available.",
+            text: "Lokgi lets a person look up a US ticker, see a price taken from the official market close, and buy or sell a frozen claim on a USDC vault. That claim is a record that the vault holds USDC against that name at the close Lokgi used.",
           },
           {
-            type: "ul",
+            type: "p",
+            text: "It is not a share of Apple, Microsoft, or any other company. It carries no dividend, no vote, and no right to the underlying stock. The token is frozen in the holder’s wallet, so it cannot be sent onward. Selling it burns it and returns USDC from the vault.",
+          },
+          {
+            type: "note",
+            title: "What Lokgi is not",
+            text: "Lokgi is not a broker, an exchange, a custodian, or an adviser. Settlement is on Solana devnet, with devnet USDC. A mainnet program is not part of the current product. An order does not print a trade on Nasdaq or the NYSE.",
+          },
+          {
+            type: "cards",
             items: [
-              "Prices come from the latest official US regular-session close.",
-              "Supported claims are priced in USDC against the Lokgi vault.",
-              "Claims cannot be transferred to another wallet.",
-              "A claim does not include company ownership, voting rights, or dividends.",
+              { href: "/docs/market", title: "The directory", text: "Thousands of US symbols can be searched. Twenty-four have a mint and an order ticket." },
+              { href: "/docs/official-close", title: "The close", text: "Orders use the latest completed US regular-session close, labelled on the screen." },
+              { href: "/docs/orders", title: "An order", text: "The server sets the price. The wallet signs. The program checks it before USDC moves." },
+              { href: "/docs/devnet", title: "Devnet", text: "Fills move devnet USDC. You pay the network fee in devnet SOL." },
             ],
           },
         ],
       },
       {
-        id: "stay-connected",
-        title: "Stay connected",
+        id: "desk",
+        title: "The desk",
         blocks: [
+          {
+            type: "p",
+            text: "The product is one website. The desk is at app.lokgi.com. After sign-in it has a market, a stock page, a portfolio, a transaction history, and account settings. The session cookie stays on that site.",
+          },
           {
             type: "links",
             items: [
-              { href: "/", label: "lokgi.com" },
-              { href: "https://app.lokgi.com", label: "Trading desk" },
+              { href: "https://app.lokgi.com", label: "Open the desk" },
+              { href: "/docs/sign-in", label: "Sign in" },
               { href: "/risk-disclosure", label: "Risk disclosure" },
             ],
           },
@@ -94,37 +84,40 @@ export const docs: DocPage[] = [
     ],
   },
   {
-    slug: "demo",
-    group: "Getting Started",
-    title: "Demo mode",
-    description: "What the current Lokgi desk does, and what it does not execute.",
+    slug: "sign-in",
+    group: "Getting started",
+    title: "Sign in",
+    description: "Email code, then a wallet signature that does not move funds.",
     sections: [
       {
-        id: "current-desk",
-        title: "The current desk",
+        id: "email",
+        title: "Email code",
         blocks: [
           {
             type: "p",
-            text: "Lokgi runs on Solana mainnet as a demonstration. You can connect a wallet, review a quote, and walk through the authorization flow. The order is simulated.",
-          },
-          {
-            type: "note",
-            title: "No live stock trade",
-            text: "Demo orders do not buy or sell shares, move real assets, or execute a live stock-market trade. Confirm the network, mint, price, fee, and transaction before you authorize anything.",
+            text: "There is no password. You enter an email address. The desk creates a six-digit code, stores only a hash of it, and emails the code. The code lives for about ten minutes. After it is accepted, a session opens.",
           },
         ],
       },
       {
-        id: "what-you-can-review",
-        title: "What you can review",
+        id: "wallet",
+        title: "Wallet",
         blocks: [
+          {
+            type: "p",
+            text: "You then connect a Solana wallet, typically Phantom or Solflare, and sign a short message. The message names the wallet address and a one-time nonce. The desk checks that signature and binds the wallet to the account. One wallet belongs to one account.",
+          },
+          {
+            type: "note",
+            title: "This signature does not pay for a trade",
+            text: "Signing the login message proves you control the wallet that will later pay for trades. It does not move USDC or SOL. A trade is a separate signature. Lokgi never asks for a seed phrase.",
+          },
           {
             type: "ul",
             items: [
-              "Company context and the latest official close.",
-              "The quote, 0.10% platform fee, and order limits before you sign.",
-              "How a claim would be minted into your wallet or burned back to USDC.",
-              "The disclosure that the token is frozen and non-transferable.",
+              "The session cookie lasts about thirty days.",
+              "The cookie is first-party, because the desk and its API share one site.",
+              "If the wallet prompt does not match the address you intend to use, reject it.",
             ],
           },
         ],
@@ -133,37 +126,84 @@ export const docs: DocPage[] = [
   },
   {
     slug: "how-it-works",
-    group: "Getting Started",
+    group: "Getting started",
     title: "From the close to the claim",
-    description: "The path from a US market close to a wallet-authorized claim.",
+    description: "What happens between looking up a ticker and holding a claim.",
     sections: [
       {
-        id: "steps",
-        title: "Steps",
+        id: "path",
+        title: "The path",
         blocks: [
           {
             type: "ul",
             items: [
-              "Open a US-listed company and compare the latest official close.",
-              "Check whether that name is one of the 24 supported claims.",
-              "Review the quote, fee, size limits, and 60-second quote lifetime.",
-              "Sign the prepared order with your Solana wallet.",
-              "The program verifies the order before it is confirmed.",
+              "Sign in with email, then bind a Solana wallet.",
+              "Open a US listing and read the labelled close.",
+              "If the name has a Lokgi mint, open the order ticket. If it does not, there is no ticket.",
+              "Press review. The server prices the order and builds a transaction that is valid for 60 seconds.",
+              "Your wallet signs and sends it. You pay the network fee in devnet SOL.",
+              "On a buy, devnet USDC enters the vault and a frozen claim is minted. On a sell, the claim is burned and USDC comes back.",
+              "The desk books the fill only after it has read the landed transaction and checked it.",
             ],
-          },
-          {
-            type: "p",
-            text: "On a buy, USDC is the amount you pay and the claim is the amount you receive. On a sell, the claim is burned and USDC is the amount you receive. In demo mode this flow is shown and simulated.",
           },
         ],
       },
       {
-        id: "reference-only",
-        title: "Reference-only names",
+        id: "four-parties",
+        title: "Who does what",
         blocks: [
           {
             type: "p",
-            text: "Companies outside the supported set can still be explored, with historical movement and the official close. They cannot be traded as a Lokgi claim until a claim is available.",
+            text: "A trade is a conversation among the browser, the API, the account book, and the Solana program. The browser cannot choose the price. The program will not move USDC until it has checked the price signature. The book does not record a fill until the chain has the transaction.",
+          },
+          {
+            type: "ul",
+            items: [
+              "The screen shows the close and prepares an order the program will accept.",
+              "The chain is the source of truth for whether money moved.",
+              "The account book is the source of truth for the account after that movement has been verified.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "market",
+    group: "Market",
+    title: "The market",
+    description: "A US directory, with a small set of names that can actually be traded.",
+    sections: [
+      {
+        id: "two-kinds",
+        title: "Two kinds of listing",
+        blocks: [
+          {
+            type: "p",
+            text: "The market is built from US listings. A small set of names, currently twenty-four large companies such as Apple, Microsoft, and NVIDIA, have a Lokgi mint and can be traded. The rest of the directory, thousands of US symbols, can be searched and viewed.",
+          },
+          {
+            type: "p",
+            text: "The busiest of those are shown as reference listings. A reference listing has a price and a chart, but no order ticket, because no claim token exists for it yet.",
+          },
+        ],
+      },
+      {
+        id: "stock-page",
+        title: "The stock page",
+        blocks: [
+          {
+            type: "p",
+            text: "The stock page shows the name, the reference price, the session, and a chart. The chart is a picture of the US listing in New York time. It does not move because someone on Lokgi traded. An order on Lokgi does not print on the US exchange.",
+          },
+          {
+            type: "ul",
+            items: [
+              "A tokenized name has an order ticket under the chart.",
+              "A buy can be entered as a dollar amount or a quantity.",
+              "A sell is a quantity, up to the amount already held.",
+              "A reference name stops at the chart.",
+            ],
           },
         ],
       },
@@ -171,35 +211,44 @@ export const docs: DocPage[] = [
   },
   {
     slug: "official-close",
-    group: "Pricing",
+    group: "Market",
     title: "Official close",
-    description: "How Lokgi prices an order against the latest completed US session.",
+    description: "How a price gets onto the screen, and what a stale quote looks like.",
     sections: [
       {
-        id: "price-source",
-        title: "Price source",
+        id: "source",
+        title: "Where the price comes from",
         blocks: [
           {
             type: "p",
-            text: "Every Lokgi order uses the latest completed US regular-session close. The price is locked into the quote and shown before you sign. It is not a live intraday bid or ask.",
+            text: "Prices come from Massive’s aggregates: the latest completed US regular-session close, not a live bid or offer. The regular session is 9:30 to 16:00 New York time, with holidays and early closes accounted for. Each quote is labelled. A fresh close is described as the last official close.",
           },
           {
-            type: "ul",
-            items: [
-              "The close is ingested after the regular session completes.",
-              "The quote displays that close as the order price.",
-              "You see the locked price, the fee, and the limits before the wallet prompt.",
-            ],
+            type: "p",
+            text: "If a plan includes the real-time snapshot, the desk can show a live price, and it says so. The browser does not invent that label.",
           },
         ],
       },
       {
-        id: "what-it-is-not",
-        title: "What the close is not",
+        id: "stale",
+        title: "When the feed does not answer",
         blocks: [
           {
             type: "p",
-            text: "The official close is a reference price for the Lokgi quote. It does not mean Lokgi routed an order to a US exchange, and a claim price can differ from a later market print because of fees, quote expiry, vault liquidity, and the demo status of the desk.",
+            text: "If Massive does not answer, the desk returns the last close it already stored and marks it stale. On a stale quote the cards keep the dollar price and the saved trend, and they replace the percent move with “Change unavailable,” so an old close is not presented as today’s change.",
+          },
+          {
+            type: "note",
+            title: "No invented market",
+            text: "If the Massive key is missing, the desk does not invent prices. It can only show a clearly labelled sample feed when that mode is turned on.",
+          },
+          {
+            type: "ul",
+            items: [
+              "An order is refused if the price is stale, or older than a few days.",
+              "The server price is signed with a key that never leaves the server.",
+              "If the price on your screen is more than 100 basis points away from that server price, the order is rejected.",
+            ],
           },
         ],
       },
@@ -207,37 +256,38 @@ export const docs: DocPage[] = [
   },
   {
     slug: "quotes",
-    group: "Pricing",
+    group: "Market",
     title: "Quotes, fees, and limits",
-    description: "What is shown on an order before you authorize it.",
+    description: "The numbers on a preview, and how long they last.",
     sections: [
       {
-        id: "quote",
-        title: "The quote",
+        id: "numbers",
+        title: "The numbers",
         blocks: [
-          {
-            type: "p",
-            text: "A quote shows the official close, the quantity, the platform fee, the order limits, and when the quote expires. Claims are priced in USDC against the Lokgi vault.",
-          },
           {
             type: "ul",
             items: [
-              "Platform fee: 0.10%.",
+              "Fee: 10 basis points, 0.10 percent.",
               "Minimum order: $1.",
               "Maximum order: $10,000.",
-              "Daily notional limit: $25,000.",
-              "Quote lifetime: 60 seconds.",
+              "Daily cap: $25,000 per account per UTC day.",
+              "Preview lifetime: 60 seconds.",
+              "Price tolerance: 100 basis points from the server price.",
             ],
+          },
+          {
+            type: "p",
+            text: "Amounts are calculated in integer micro-units, six decimal places. The remainder is truncated rather than rounded up. Claims are priced in USDC.",
           },
         ],
       },
       {
-        id: "before-you-sign",
-        title: "Before you sign",
+        id: "preview",
+        title: "What the preview includes",
         blocks: [
           {
             type: "p",
-            text: "If the quote expires, request a new one. The wallet prompt should match the amount, the mint, and the fee you just reviewed. In demo mode the preview is still shown, and the order is not executed as a live trade.",
+            text: "Review shows the close, the fee, the quantity, and the transaction you are about to sign. If the preview expires, start again. The wallet prompt should match the amount and the mint on the screen. Reject it if it does not.",
           },
         ],
       },
@@ -247,30 +297,30 @@ export const docs: DocPage[] = [
     slug: "vault",
     group: "Claims",
     title: "The USDC vault",
-    description: "What a Lokgi token represents inside the vault.",
+    description: "What the token is a claim on.",
     sections: [
       {
-        id: "structure",
-        title: "Structure",
+        id: "record",
+        title: "The record",
         blocks: [
           {
             type: "p",
-            text: "A Lokgi token is a frozen, non-transferable claim against USDC held in the Lokgi Solana vault. Buying sends USDC toward the vault and mints a claim to your wallet. Selling burns the claim back toward USDC.",
+            text: "A Lokgi claim is a record that the vault holds USDC against a name, at the close used for that order. On a buy, devnet USDC leaves the wallet and enters the program’s vault, and the program mints the frozen claim. On a sell, the program burns the claim and sends USDC back out of the vault.",
           },
           {
             type: "note",
-            title: "Vault-backed, not a share",
-            text: "The claim is against the vault under Lokgi’s product rules. It is not a share, deposit at a broker, or a right to receive the referenced stock.",
+            title: "Not a share, and not a brokerage balance",
+            text: "The claim is against USDC in the Lokgi vault under the program’s rules. It is not a deposit at a broker, and it is not a right to receive the referenced stock.",
           },
         ],
       },
       {
-        id: "liquidity",
-        title: "Liquidity",
+        id: "position",
+        title: "The position",
         blocks: [
           {
             type: "p",
-            text: "A sale depends on vault liquidity and the program rules. The vault may not fill a requested size at the expected price or time. Review the vault, the fee, and the limits before you trade.",
+            text: "When a buy lands, the program records a position for that person and that symbol: the quantity and the cost basis. A later sell uses that position. The portfolio reads the same cost basis when it shows unrealized profit.",
           },
         ],
       },
@@ -280,22 +330,22 @@ export const docs: DocPage[] = [
     slug: "restrictions",
     group: "Claims",
     title: "Transfer restrictions",
-    description: "Why a Lokgi claim stays in the wallet that holds it.",
+    description: "Why the token cannot be sent to another wallet.",
     sections: [
       {
         id: "frozen",
-        title: "Frozen and non-transferable",
+        title: "Frozen",
         blocks: [
           {
             type: "p",
-            text: "A supported claim cannot be transferred to another wallet. The token is frozen. Sending it is blocked. The way out of a position is a sell that burns the claim back to USDC, subject to the quote, the vault, and demo rules.",
+            text: "The token is frozen in the holder’s wallet. A transfer to another address is blocked. There is no secondary market in the token itself. The way out of a position is a sell, which burns the claim and returns USDC from the vault, subject to the quote, the limits, and the program.",
           },
           {
             type: "ul",
             items: [
-              "Transfers to another address are blocked.",
-              "The claim stays bound to the holding wallet.",
-              "There is no secondary transfer market for the token.",
+              "You cannot send the claim onward.",
+              "One wallet is bound to one account, and the claim stays in that wallet.",
+              "A sell quantity cannot exceed the amount already held.",
             ],
           },
         ],
@@ -306,7 +356,7 @@ export const docs: DocPage[] = [
     slug: "rights",
     group: "Claims",
     title: "What you do not receive",
-    description: "Ownership, voting, and dividends are outside a Lokgi claim.",
+    description: "Ownership, voting, and dividends sit outside a Lokgi claim.",
     sections: [
       {
         id: "not-a-share",
@@ -314,7 +364,7 @@ export const docs: DocPage[] = [
         blocks: [
           {
             type: "p",
-            text: "Holding a Lokgi claim does not make you a shareholder of the referenced company. You do not receive voting rights, dividends, or the right to exchange the token for shares.",
+            text: "Holding a Lokgi claim does not make you a shareholder. You do not receive dividends. You do not vote. You cannot exchange the token for shares of the company. The chart on the stock page is the US listing. Your order does not move it.",
           },
           {
             type: "ul",
@@ -322,7 +372,122 @@ export const docs: DocPage[] = [
               "No company ownership.",
               "No voting rights.",
               "No dividends.",
-              "The token tracks a price-linked vault claim, not equity.",
+              "No right to the underlying stock.",
+              "No print on Nasdaq or the NYSE.",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "orders",
+    group: "Trading",
+    title: "Reviewing an order",
+    description: "What the desk checks before it will build a transaction.",
+    sections: [
+      {
+        id: "review",
+        title: "Review",
+        blocks: [
+          {
+            type: "p",
+            text: "You press review. The desk checks the session and the linked wallet, reads the server price, and refuses a stale price or one older than a few days. It opens an order row, builds a Solana transaction, and signs the price with an oracle key that stays on the server.",
+          },
+          {
+            type: "ul",
+            items: [
+              "A buy is a dollar amount or a quantity. A sell is a quantity you already hold.",
+              "The fee, quantity, and transaction in the preview are valid for 60 seconds.",
+              "If your displayed price is more than 100 basis points from the server price, the order is rejected.",
+              "Orders that expire, or that fail a check, are cancelled or rejected.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "after-send",
+        title: "After you send",
+        blocks: [
+          {
+            type: "p",
+            text: "The wallet signs and sends the transaction. You pay the network fee in devnet SOL. After it lands, the browser posts the signature back. The desk reads the landed transaction and checks that the right wallet, program, symbol, amount, and price were used. Only then does it book the fill.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "settlement",
+    group: "Trading",
+    title: "Settlement",
+    description: "What the program does, and what gets written down afterward.",
+    sections: [
+      {
+        id: "program",
+        title: "On the program",
+        blocks: [
+          {
+            type: "p",
+            text: "The program checks the oracle’s signature before it moves anything. On a buy it takes devnet USDC into the vault, mints the frozen claim into the wallet, and records the position. On a sell it burns the claim and sends USDC back out of the vault.",
+          },
+          {
+            type: "ul",
+            items: [
+              "The user pays the network fee in devnet SOL.",
+              "USDC in the trade is devnet USDC.",
+              "A failed program check moves nothing.",
+            ],
+          },
+        ],
+      },
+      {
+        id: "booking",
+        title: "Booking the fill",
+        blocks: [
+          {
+            type: "p",
+            text: "Booking is one database transaction: the fill, the cash and token journals, the holding, the order marked filled, an audit line, and a notification. A fill is idempotent by signature, so a retry does not book it twice.",
+          },
+          {
+            type: "p",
+            text: "A daily job clears stale orders and reconciles the ledger. Until a transaction has landed and been checked, the portfolio does not treat it as a fill.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "holdings",
+    group: "Trading",
+    title: "Portfolio and history",
+    description: "Cash, cost basis, and the record of what landed.",
+    sections: [
+      {
+        id: "portfolio",
+        title: "Portfolio",
+        blocks: [
+          {
+            type: "p",
+            text: "The portfolio reads cash from the wallet’s USDC account and values holdings at the latest close. Unrealized profit uses the on-chain cost basis. Realized profit comes from booked sells. The first visit of a UTC day stores an equity snapshot.",
+          },
+        ],
+      },
+      {
+        id: "history",
+        title: "History and notices",
+        blocks: [
+          {
+            type: "p",
+            text: "Transaction history can be filtered and exported. Notifications for a linked wallet and for fills are polled while you are signed in. A row appears after the fill is booked, which is after the chain transaction has been checked.",
+          },
+          {
+            type: "ul",
+            items: [
+              "Cash: USDC in the connected wallet.",
+              "Quantity and cost basis: the position recorded on the program.",
+              "Realized profit: sells that have been booked.",
+              "A missing percent on a quote means the change was unavailable, not that the price was zero.",
             ],
           },
         ],
@@ -331,25 +496,25 @@ export const docs: DocPage[] = [
   },
   {
     slug: "wallet",
-    group: "Solana",
-    title: "Wallet authorization",
-    description: "Who prepares an order, and who has to sign it.",
+    group: "Reference",
+    title: "Wallet",
+    description: "Two different signatures, and what each one does.",
     sections: [
       {
-        id: "roles",
-        title: "Roles",
+        id: "two-signatures",
+        title: "Two signatures",
         blocks: [
           {
             type: "p",
-            text: "Lokgi prepares the order and shows the quote. Your wallet authorizes it. Nothing settles because a page button was clicked. The signature is the authorization.",
+            text: "The first signature binds the wallet. It is a message with your address and a nonce. It does not move funds. The second signature, on a trade, sends the transaction the desk prepared. That one does move devnet USDC and pays the network fee in devnet SOL.",
           },
           {
             type: "ul",
             items: [
-              "Use a compatible Solana wallet.",
+              "Phantom and Solflare are the wallets people typically use.",
               "Read the account, amount, and mint in the wallet prompt.",
-              "Reject the prompt if it does not match the quote on screen.",
-              "Never share a seed phrase or private key. Lokgi will not ask for one.",
+              "Reject a prompt that does not match the preview.",
+              "Never share a seed phrase or private key. The desk will not ask for one.",
             ],
           },
         ],
@@ -357,64 +522,75 @@ export const docs: DocPage[] = [
     ],
   },
   {
-    slug: "settlement",
-    group: "Solana",
-    title: "Onchain settlement",
-    description: "How a signed order is checked before confirmation.",
+    slug: "devnet",
+    group: "Reference",
+    title: "Solana devnet",
+    description: "The network this product actually settles on.",
     sections: [
       {
-        id: "program",
-        title: "Program check",
+        id: "network",
+        title: "This product",
         blocks: [
           {
             type: "p",
-            text: "After you sign, the Solana program verifies the order before confirmation. The check covers the prepared instruction, not a broker route to a US exchange.",
+            text: "Settlement is on Solana devnet. The USDC in a trade is devnet USDC. The network fee is devnet SOL. A mainnet program is not part of the current product. Do not send mainnet assets to a devnet address, and do not treat a devnet balance as a mainnet balance.",
           },
           {
-            type: "ul",
-            items: [
-              "Order prepared by Lokgi.",
-              "Authorized by your wallet.",
-              "Verified by the program before confirmation.",
-              "Demo mode stops short of a live stock trade.",
-            ],
+            type: "note",
+            title: "The chart is still the US listing",
+            text: "Devnet settlement does not mean the price is made up. The close is the US regular-session close. What settles on devnet is the USDC and the claim, not a share.",
           },
         ],
       },
       {
-        id: "irreversible",
-        title: "Chain finality",
+        id: "confirm",
+        title: "Before you sign a trade",
         blocks: [
           {
-            type: "p",
-            text: "A confirmed Solana transaction is not something the desk can silently undo. Network congestion, a wrong account, or a signed transaction you did not intend can delay or lose funds. Read the prompt before you approve it.",
+            type: "ul",
+            items: [
+              "Confirm the wallet is on devnet.",
+              "Confirm the mint, the amount, and the fee in the prompt.",
+              "A confirmed devnet transaction is still not something the desk can silently undo.",
+            ],
           },
         ],
       },
     ],
   },
   {
-    slug: "holdings",
-    group: "Solana",
-    title: "Holdings",
-    description: "Balances, claims, and the history shown on the desk.",
+    slug: "records",
+    group: "Reference",
+    title: "What is recorded where",
+    description: "The chain, the book, and the screen each have a different job.",
     sections: [
       {
-        id: "what-you-see",
-        title: "What you see",
+        id: "split",
+        title: "Three records",
         blocks: [
           {
             type: "p",
-            text: "The holdings view is where you review USDC balances and claim quantities for supported names, along with cost basis, estimated profit and loss, and transaction history.",
+            text: "The chain is the source of truth for whether money moved. Postgres is the source of truth for the account book after that movement has been verified: accounts, orders, fills, and saved prices. The screen’s job is to show the close honestly, prepare an order the program will accept, and then report only what actually landed.",
           },
           {
             type: "ul",
             items: [
-              "USDC balance in the connected wallet context.",
-              "Quantity of each supported claim.",
-              "Cost basis and estimated profit and loss.",
-              "A single history of the transactions the desk records.",
+              "Sign-in stores a hash of the email code, not the code.",
+              "The session is a cookie on the same site as the API.",
+              "Saved prices let the desk show a last close when Massive does not answer, marked stale.",
+              "A fill is stored once per signature.",
+              "A daily job clears stale orders and reconciles the ledger.",
             ],
+          },
+        ],
+      },
+      {
+        id: "same-site",
+        title: "One site",
+        blocks: [
+          {
+            type: "p",
+            text: "The desk and the API are deployed together. The browser calls /v1 on the same site. That is why the session cookie can stay first-party. Abuse and rate checks sit in front of the API. Email delivery is only for the sign-in code.",
           },
         ],
       },
@@ -423,24 +599,25 @@ export const docs: DocPage[] = [
   {
     slug: "risks",
     group: "Legal",
-    title: "Risks and legal",
-    description: "The short version of the disclosures, with links to the full pages.",
+    title: "Risks",
+    description: "The short version, with links to the full pages.",
     sections: [
       {
         id: "summary",
-        title: "Summary",
+        title: "Read this before a trade",
         blocks: [
           {
             type: "p",
-            text: "Lokgi is an educational demo, not a brokerage or investment service. US stock prices move. A claim depends on the vault, the program, and the quote you accepted. Blockchain transactions can be irreversible. Availability and legal treatment vary by jurisdiction.",
+            text: "US stock prices move. The order price is a close, unless a live price is explicitly labelled. A claim depends on the vault, the program, and the quote you accepted. Devnet assets are not mainnet assets. A confirmed transaction can be irreversible. Nothing on this site is investment, legal, or tax advice.",
           },
           {
             type: "ul",
             items: [
-              "Market prices can fall quickly.",
-              "The vault may not have liquidity for a sale.",
-              "Wallet, program, and network failures can delay or lose a transaction.",
-              "Nothing on this site is investment, legal, or tax advice.",
+              "A claim is not a share and pays no dividend.",
+              "The token cannot be transferred.",
+              "A stale close is labelled. The percent may read “Change unavailable.”",
+              "Size, fee, and the 60-second preview are hard limits.",
+              "You pay network fees in devnet SOL.",
             ],
           },
         ],

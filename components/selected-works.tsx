@@ -5,21 +5,21 @@ import { useState } from "react"
 
 const panels = [
   {
-    title: "Discover the companies behind the market",
-    eyebrow: "US MARKET OVERVIEW · OFFICIAL CLOSE",
-    body: "Explore US-listed companies, review historical price movements, and compare stock-market reference prices. Other companies remain reference-only until an onchain claim is available.",
-    href: "/docs",
+    title: "Look up the listing first",
+    eyebrow: "US DIRECTORY · OFFICIAL CLOSE",
+    body: "The market is the US listings directory. Twenty-four names have a Lokgi mint. Everything else can be searched and charted. Those pages do not offer an order, because no claim exists for them yet.",
+    href: "/docs/market",
   },
   {
-    title: "Wallet-authorized settlement",
-    eyebrow: "SOLANA MAINNET · SUPPORTED CLAIMS",
-    body: "Connect a compatible Solana wallet and authorize supported buy or sell orders against the Lokgi USDC vault.",
+    title: "Settle on Solana devnet",
+    eyebrow: "DEVNET USDC · WALLET SIGNED",
+    body: "You sign in with email, connect a Solana wallet, and sign a message that only proves you control it. A trade is a separate signature. Devnet USDC moves into the vault or back out. There is no mainnet program in this product.",
     href: "/docs/settlement",
   },
   {
-    title: "Understand the claim",
-    eyebrow: "NON-TRANSFERABLE · USDC VAULT · DISCLOSURES",
-    body: "Lokgi claims are not company shares. Review the vault structure, price source, transfer restrictions, fees, limits, and demo status before trading.",
+    title: "A claim is not the stock",
+    eyebrow: "FROZEN · USDC VAULT · NO SHARE RIGHTS",
+    body: "The token says the vault holds USDC against that name at the close Lokgi used. It pays no dividend, carries no vote, and cannot be sent to another wallet. Selling it burns it.",
     href: "/docs/vault",
   },
 ]

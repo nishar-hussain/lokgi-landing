@@ -34,9 +34,9 @@ export default function MarketIndex() {
       <div className="mx-auto max-w-7xl overflow-hidden rounded-[1.5rem] border border-white/10 bg-black text-white">
         <div className="grid lg:grid-cols-2">
           <div className="border-b border-white/15 p-7 md:p-10 lg:border-b-0 lg:border-r lg:p-12">
-            <p className="text-[clamp(4.5rem,8vw,7.5rem)] font-medium leading-[0.85] tracking-[-0.06em]">100+</p>
+            <p className="text-[clamp(4.5rem,8vw,7.5rem)] font-medium leading-[0.85] tracking-[-0.06em]">24</p>
             <h2 className="mt-5 max-w-lg text-3xl font-medium leading-[1.02] tracking-[-0.04em] md:text-5xl">
-              familiar companies.<br />one clear view.
+              names you can trade.<br />a directory beside them.
             </h2>
 
             <div className="mt-12 grid grid-cols-4 gap-3 sm:grid-cols-7 sm:gap-5">
@@ -79,14 +79,14 @@ export default function MarketIndex() {
             <div className="relative z-10 flex h-full flex-col p-1">
               <div className="flex items-start justify-between gap-6">
                 <h2 className="max-w-xl text-4xl font-medium leading-[1.02] tracking-[-0.04em] md:text-5xl lg:text-6xl">
-                  One market<br />reference.<br />Built onchain.
+                  The close,<br />then the claim.<br />On devnet.
                 </h2>
                 <span className="hidden whitespace-nowrap text-right text-sm font-semibold uppercase tracking-[0.14em] text-white/50 sm:block">Lokgi<br />Markets</span>
               </div>
 
               <div className="mt-auto max-w-xl pt-16">
                 <p className="text-sm leading-6 text-white/65 md:text-base">
-                  Explore US-listed companies, compare official closing prices, and discover which assets are available as supported claims on Solana.
+                  Apple, Microsoft, NVIDIA, and the rest of this set can be bought or sold as claims. Other US symbols stay on the page as reference: a price, a chart, and no ticket.
                 </p>
                 <a href="#works" className="mt-7 inline-flex items-center gap-4 rounded-full bg-white px-5 py-3.5 text-xs font-bold uppercase tracking-[0.14em] text-black transition-transform hover:-translate-y-1">
                   Explore market <ArrowUpRight size={16} />

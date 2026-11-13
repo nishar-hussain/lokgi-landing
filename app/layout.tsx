@@ -16,8 +16,8 @@ const switzer = localFont({
 })
 
 export const metadata: Metadata = {
-  title: "lokgi — US Stocks, Meet Solana",
-  description: "Explore US-listed companies, official closing prices, and non-transferable USDC-vault claims on Solana.",
+  title: "lokgi — US stocks, settled on Solana devnet",
+  description: "Look up US-listed companies at the official close, and buy or sell a frozen USDC-vault claim on Solana devnet.",
   icons: {
     icon: "/images/logsi-mark.jpeg",
   },

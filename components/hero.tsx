@@ -40,20 +40,22 @@ export default function Hero() {
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6">
           {/* Product introduction */}
           <div className="lg:max-w-3xl pt-0">
-            <p className="mb-5 text-sm font-medium uppercase tracking-[0.14em] text-foreground/60">US MARKETS. ONCHAIN SETTLEMENT.</p>
+            <p className="mb-5 text-sm font-medium uppercase tracking-[0.14em] text-foreground/60">US listings. Solana devnet.</p>
             <h1 className="text-balance text-left text-4xl font-medium leading-[1.02] tracking-[-0.04em] text-accent md:text-[42px]">
-              Discover US Stocks, Trade on Solana.
+              A reference desk for US stocks.
             </h1>
 
             <p className="mt-5 max-w-xl text-base leading-7 text-foreground/70">
-              Explore leading US companies and their official market prices, then buy or sell Solana-based claims linked to those stocks. Every trade is wallet-authorized and settled onchain with transparent pricing.
+              Look up a ticker, see the latest official close, and buy or sell a frozen claim on a USDC vault. The claim records USDC held against that name. It is not a share of the company.
             </p>
 
             <a
-              href="#works"
+              href="https://app.lokgi.com"
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-8 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity"
             >
-              Explore Markets
+              Open the desk
               <ArrowUpRight className="h-4 w-4" />
             </a>
             <Link
@@ -67,7 +69,7 @@ export default function Hero() {
 
           <div className="max-w-[260px] pt-8 lg:pt-12">
             <p className="text-sm leading-6 text-foreground/70">
-              Explore 24 supported stock-linked claims alongside a broader directory of US-listed companies.
+              Twenty-four names can be traded. The rest of the US directory can be looked up, with a price and a chart, and no order ticket.
             </p>
           </div>
         </div>
