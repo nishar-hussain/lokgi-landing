@@ -7,7 +7,7 @@ const panels = [
   {
     title: "Look up the listing first",
     eyebrow: "US DIRECTORY · OFFICIAL CLOSE",
-    body: "The market is the US listings directory. Twenty-four names have a Lokgi mint. Everything else can be searched and charted. Those pages do not offer an order, because no claim exists for them yet.",
+    body: "The market is the US listings directory. More than 100 names have a Lokgi mint. Everything else can be searched and charted. Those pages do not offer an order, because no claim exists for them yet.",
     href: "/docs/market",
   },
   {

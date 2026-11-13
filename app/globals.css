@@ -245,18 +245,6 @@
   }
 }
 
-.market-tape-track {
-  display: flex;
-  width: max-content;
-  align-items: center;
-  animation: logo-marquee-scroll 48s linear infinite;
-  will-change: transform;
-}
-
-.market-tape-track:hover {
-  animation-play-state: paused;
-}
-
 .logo-marquee:hover .logo-marquee-track {
   animation-play-state: paused;
 }
@@ -271,10 +259,6 @@
 
   .phone-float,
   .sign-pulse {
-    animation: none;
-  }
-
-  .market-tape-track {
     animation: none;
   }
 }

@@ -10,7 +10,7 @@ const slides = [
     title: "Explore US stocks.",
     points: [
       "Search US listings and open a company page.",
-      "Twenty-four names have an order ticket. The rest are reference only.",
+      "More than 100 names have an order ticket. The rest are reference only.",
       "A reference listing shows the close and a chart, and nothing to buy.",
     ],
     cta: "Explore markets",

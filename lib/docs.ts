@@ -55,7 +55,7 @@ export const docs: DocPage[] = [
           {
             type: "cards",
             items: [
-              { href: "/docs/market", title: "The directory", text: "Thousands of US symbols can be searched. Twenty-four have a mint and an order ticket." },
+              { href: "/docs/market", title: "The directory", text: "Thousands of US symbols can be searched. More than 100 have a mint and an order ticket." },
               { href: "/docs/official-close", title: "The close", text: "Orders use the latest completed US regular-session close, labelled on the screen." },
               { href: "/docs/orders", title: "An order", text: "The server sets the price. The wallet signs. The program checks it before USDC moves." },
               { href: "/docs/mainnet", title: "Mainnet", text: "Fills move USDC on Solana mainnet. You pay the network fee in SOL." },
@@ -172,7 +172,7 @@ export const docs: DocPage[] = [
     slug: "market",
     group: "Market",
     title: "The market",
-    description: "A US directory, with a small set of names that can actually be traded.",
+    description: "A US directory. More than 100 names can be traded.",
     sections: [
       {
         id: "two-kinds",
@@ -180,7 +180,7 @@ export const docs: DocPage[] = [
         blocks: [
           {
             type: "p",
-            text: "The market is built from US listings. A small set of names, currently twenty-four large companies such as Apple, Microsoft, and NVIDIA, have a Lokgi mint and can be traded. The rest of the directory, thousands of US symbols, can be searched and viewed.",
+            text: "The market is built from US listings. More than 100 names, including Apple, Microsoft, and NVIDIA, have a Lokgi mint and can be traded. The rest of the directory, thousands of US symbols, can be searched and viewed.",
           },
           {
             type: "p",

@@ -1,5 +1,4 @@
 import Header from "@/components/header"
-import MarketTape from "@/components/market-tape"
 import Hero from "@/components/hero"
 import About from "@/components/about"
 import SelectedWorks from "@/components/selected-works"
@@ -14,7 +13,6 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-background">
       <Header />
-      <MarketTape />
       <Hero />
       <About />
       <MarketRail />

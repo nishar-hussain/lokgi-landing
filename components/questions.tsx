@@ -23,7 +23,7 @@ const questions = [
   },
   {
     q: "Which names can I trade?",
-    a: "Twenty-four large companies, including Apple, Microsoft, and NVIDIA, have a Lokgi mint and an order ticket. Thousands of other US symbols can be searched. A reference listing shows a price and a chart, and no way to place an order.",
+    a: "More than 100 companies, including Apple, Microsoft, and NVIDIA, have a Lokgi mint and an order ticket. Thousands of other US symbols can be searched. A reference listing shows a price and a chart, and no way to place an order.",
   },
   {
     q: "Where does the price come from?",

@@ -3,7 +3,7 @@ import Link from "next/link"
 
 const stats = [
   { label: "Listings", value: "US", note: "Search the US directory" },
-  { label: "Tradable names", value: "24", note: "A mint and an order ticket" },
+  { label: "Tradable names", value: "100+", note: "A mint and an order ticket" },
   { label: "Settlement", value: "Mainnet", note: "Solana mainnet. USDC." },
   { label: "What you hold", value: "USDC", note: "Frozen claim on the vault" },
   { label: "Order price", value: "Close", note: "Last completed US session" },
