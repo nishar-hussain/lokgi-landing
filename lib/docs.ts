@@ -24,7 +24,7 @@ export const docsNav: { title: string; slugs: string[] }[] = [
   { title: "Market", slugs: ["market", "official-close", "quotes"] },
   { title: "Claims", slugs: ["vault", "restrictions", "rights"] },
   { title: "Trading", slugs: ["orders", "settlement", "holdings"] },
-  { title: "Reference", slugs: ["wallet", "devnet", "records"] },
+  { title: "Reference", slugs: ["wallet", "mainnet", "records"] },
   { title: "Legal", slugs: ["risks"] },
 ]
 
@@ -33,7 +33,7 @@ export const docs: DocPage[] = [
     slug: "",
     group: "Getting started",
     title: "Lokgi",
-    description: "A reference desk for US-listed companies, with settlement on Solana devnet.",
+    description: "A reference desk for US-listed companies, with settlement on Solana mainnet.",
     sections: [
       {
         id: "what-it-is",
@@ -50,7 +50,7 @@ export const docs: DocPage[] = [
           {
             type: "note",
             title: "What Lokgi is not",
-            text: "Lokgi is not a broker, an exchange, a custodian, or an adviser. Settlement is on Solana devnet, with devnet USDC. A mainnet program is not part of the current product. An order does not print a trade on Nasdaq or the NYSE.",
+            text: "Lokgi is not a broker, an exchange, a custodian, or an adviser. Settlement is on Solana mainnet, with USDC. An order does not print a trade on Nasdaq or the NYSE.",
           },
           {
             type: "cards",
@@ -58,7 +58,7 @@ export const docs: DocPage[] = [
               { href: "/docs/market", title: "The directory", text: "Thousands of US symbols can be searched. Twenty-four have a mint and an order ticket." },
               { href: "/docs/official-close", title: "The close", text: "Orders use the latest completed US regular-session close, labelled on the screen." },
               { href: "/docs/orders", title: "An order", text: "The server sets the price. The wallet signs. The program checks it before USDC moves." },
-              { href: "/docs/devnet", title: "Devnet", text: "Fills move devnet USDC. You pay the network fee in devnet SOL." },
+              { href: "/docs/mainnet", title: "Mainnet", text: "Fills move USDC on Solana mainnet. You pay the network fee in SOL." },
             ],
           },
         ],
@@ -141,8 +141,8 @@ export const docs: DocPage[] = [
               "Open a US listing and read the labelled close.",
               "If the name has a Lokgi mint, open the order ticket. If it does not, there is no ticket.",
               "Press review. The server prices the order and builds a transaction that is valid for 60 seconds.",
-              "Your wallet signs and sends it. You pay the network fee in devnet SOL.",
-              "On a buy, devnet USDC enters the vault and a frozen claim is minted. On a sell, the claim is burned and USDC comes back.",
+              "Your wallet signs and sends it. You pay the network fee in SOL.",
+              "On a buy, USDC enters the vault and a frozen claim is minted. On a sell, the claim is burned and USDC comes back.",
               "The desk books the fill only after it has read the landed transaction and checked it.",
             ],
           },
@@ -305,7 +305,7 @@ export const docs: DocPage[] = [
         blocks: [
           {
             type: "p",
-            text: "A Lokgi claim is a record that the vault holds USDC against a name, at the close used for that order. On a buy, devnet USDC leaves the wallet and enters the program’s vault, and the program mints the frozen claim. On a sell, the program burns the claim and sends USDC back out of the vault.",
+            text: "A Lokgi claim is a record that the vault holds USDC against a name, at the close used for that order. On a buy, USDC leaves the wallet and enters the program’s vault, and the program mints the frozen claim. On a sell, the program burns the claim and sends USDC back out of the vault.",
           },
           {
             type: "note",
@@ -411,7 +411,7 @@ export const docs: DocPage[] = [
         blocks: [
           {
             type: "p",
-            text: "The wallet signs and sends the transaction. You pay the network fee in devnet SOL. After it lands, the browser posts the signature back. The desk reads the landed transaction and checks that the right wallet, program, symbol, amount, and price were used. Only then does it book the fill.",
+            text: "The wallet signs and sends the transaction. You pay the network fee in SOL. After it lands, the browser posts the signature back. The desk reads the landed transaction and checks that the right wallet, program, symbol, amount, and price were used. Only then does it book the fill.",
           },
         ],
       },
@@ -429,13 +429,13 @@ export const docs: DocPage[] = [
         blocks: [
           {
             type: "p",
-            text: "The program checks the oracle’s signature before it moves anything. On a buy it takes devnet USDC into the vault, mints the frozen claim into the wallet, and records the position. On a sell it burns the claim and sends USDC back out of the vault.",
+            text: "The program checks the oracle’s signature before it moves anything. On a buy it takes USDC into the vault, mints the frozen claim into the wallet, and records the position. On a sell it burns the claim and sends USDC back out of the vault.",
           },
           {
             type: "ul",
             items: [
-              "The user pays the network fee in devnet SOL.",
-              "USDC in the trade is devnet USDC.",
+              "The user pays the network fee in SOL.",
+              "USDC in the trade is mainnet USDC.",
               "A failed program check moves nothing.",
             ],
           },
@@ -506,7 +506,7 @@ export const docs: DocPage[] = [
         blocks: [
           {
             type: "p",
-            text: "The first signature binds the wallet. It is a message with your address and a nonce. It does not move funds. The second signature, on a trade, sends the transaction the desk prepared. That one does move devnet USDC and pays the network fee in devnet SOL.",
+            text: "The first signature binds the wallet. It is a message with your address and a nonce. It does not move funds. The second signature, on a trade, sends the transaction the desk prepared. That one moves USDC on mainnet and pays the network fee in SOL.",
           },
           {
             type: "ul",
@@ -522,10 +522,10 @@ export const docs: DocPage[] = [
     ],
   },
   {
-    slug: "devnet",
+    slug: "mainnet",
     group: "Reference",
-    title: "Solana devnet",
-    description: "The network this product actually settles on.",
+    title: "Solana mainnet",
+    description: "The network this product settles on.",
     sections: [
       {
         id: "network",
@@ -533,12 +533,12 @@ export const docs: DocPage[] = [
         blocks: [
           {
             type: "p",
-            text: "Settlement is on Solana devnet. The USDC in a trade is devnet USDC. The network fee is devnet SOL. A mainnet program is not part of the current product. Do not send mainnet assets to a devnet address, and do not treat a devnet balance as a mainnet balance.",
+            text: "Settlement is on Solana mainnet. The USDC in a trade is mainnet USDC. The network fee is SOL. Confirm the wallet is on mainnet before you sign.",
           },
           {
             type: "note",
             title: "The chart is still the US listing",
-            text: "Devnet settlement does not mean the price is made up. The close is the US regular-session close. What settles on devnet is the USDC and the claim, not a share.",
+            text: "Mainnet settlement does not mean the order is a share trade. The close is the US regular-session close. What settles on mainnet is the USDC and the claim, not a share.",
           },
         ],
       },
@@ -549,9 +549,9 @@ export const docs: DocPage[] = [
           {
             type: "ul",
             items: [
-              "Confirm the wallet is on devnet.",
+              "Confirm the wallet is on mainnet.",
               "Confirm the mint, the amount, and the fee in the prompt.",
-              "A confirmed devnet transaction is still not something the desk can silently undo.",
+              "A confirmed mainnet transaction is not something the desk can silently undo.",
             ],
           },
         ],
@@ -608,7 +608,7 @@ export const docs: DocPage[] = [
         blocks: [
           {
             type: "p",
-            text: "US stock prices move. The order price is a close, unless a live price is explicitly labelled. A claim depends on the vault, the program, and the quote you accepted. Devnet assets are not mainnet assets. A confirmed transaction can be irreversible. Nothing on this site is investment, legal, or tax advice.",
+            text: "US stock prices move. The order price is a close, unless a live price is explicitly labelled. A claim depends on the vault, the program, and the quote you accepted. Settlement is on Solana mainnet. A confirmed transaction can be irreversible. Nothing on this site is investment, legal, or tax advice.",
           },
           {
             type: "ul",
@@ -617,7 +617,7 @@ export const docs: DocPage[] = [
               "The token cannot be transferred.",
               "A stale close is labelled. The percent may read “Change unavailable.”",
               "Size, fee, and the 60-second preview are hard limits.",
-              "You pay network fees in devnet SOL.",
+              "You pay network fees in SOL.",
             ],
           },
         ],

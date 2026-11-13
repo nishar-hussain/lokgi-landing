@@ -171,7 +171,7 @@ export default function About() {
                       <SolanaMark id="lokgi-solana-header" className="h-7 w-7" />
                       <div>
                         <p className="text-[12px] font-semibold leading-none text-foreground">Solana</p>
-                        <p className="mt-1 text-[9px] leading-none text-foreground/45">Devnet · USDC</p>
+                        <p className="mt-1 text-[9px] leading-none text-foreground/45">Mainnet · USDC</p>
                       </div>
                     </div>
                     <span className="shrink-0 whitespace-nowrap rounded-full bg-black px-2 py-1 text-[9px] font-medium leading-none text-white">

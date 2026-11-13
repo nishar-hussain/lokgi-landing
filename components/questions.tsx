@@ -7,11 +7,11 @@ import { ChevronDown } from "lucide-react"
 const questions = [
   {
     q: "What is Lokgi?",
-    a: "Lokgi is a reference desk for US-listed companies. You look up a ticker, see a price from the official market close, and can buy or sell a frozen claim on a USDC vault. Settlement is on Solana devnet. Lokgi is not a broker, an exchange, a custodian, or an adviser.",
+    a: "Lokgi is a reference desk for US-listed companies. You look up a ticker, see a price from the official market close, and can buy or sell a frozen claim on a USDC vault. Settlement is on Solana mainnet. Lokgi is not a broker, an exchange, a custodian, or an adviser.",
   },
   {
     q: "What is a Lokgi claim?",
-    a: "A claim is a record that the vault holds USDC against that name, at the close Lokgi used. Buying sends devnet USDC in and mints the claim. Selling burns the claim and returns USDC from the vault. The token is frozen, so it cannot be sent to another wallet.",
+    a: "A claim is a record that the vault holds USDC against that name, at the close Lokgi used. Buying sends mainnet USDC in and mints the claim. Selling burns the claim and returns USDC from the vault. The token is frozen, so it cannot be sent to another wallet.",
   },
   {
     q: "Does Lokgi hold the stock?",
@@ -19,7 +19,7 @@ const questions = [
   },
   {
     q: "What does an order cost?",
-    a: "The fee is 0.10%. Amounts are calculated in micro-units and the remainder is truncated. An order must be at least $1 and at most $10,000, with a $25,000 cap per account per UTC day. The preview is valid for 60 seconds. You also pay the Solana network fee in devnet SOL.",
+    a: "The fee is 0.10%. Amounts are calculated in micro-units and the remainder is truncated. An order must be at least $1 and at most $10,000, with a $25,000 cap per account per UTC day. The preview is valid for 60 seconds. You also pay the Solana network fee in mainnet SOL.",
   },
   {
     q: "Which names can I trade?",

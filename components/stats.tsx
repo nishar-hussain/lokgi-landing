@@ -4,7 +4,7 @@ import Link from "next/link"
 const stats = [
   { label: "Listings", value: "US", note: "Search the US directory" },
   { label: "Tradable names", value: "24", note: "A mint and an order ticket" },
-  { label: "Settlement", value: "Devnet", note: "Solana devnet. Devnet USDC." },
+  { label: "Settlement", value: "Mainnet", note: "Solana mainnet. USDC." },
   { label: "What you hold", value: "USDC", note: "Frozen claim on the vault" },
   { label: "Order price", value: "Close", note: "Last completed US session" },
   { label: "Fee", value: "0.10%", note: "$1 to $10,000 an order" },
@@ -21,7 +21,7 @@ export default function Stats() {
               <span className="text-sm font-medium uppercase tracking-[0.14em]">Know what you hold</span>
             </div>
             <h2 className="text-4xl font-medium leading-[1.02] tracking-[-0.04em] md:text-5xl">The desk, in six facts.</h2>
-            <p className="mt-6 max-w-xl text-base leading-7 text-white/60">A US listing, a labelled close, and a frozen claim on devnet. The chain shows whether USDC moved. The book records the fill only after that.</p>
+            <p className="mt-6 max-w-xl text-base leading-7 text-white/60">A US listing, a labelled close, and a frozen claim on mainnet. The chain shows whether USDC moved. The book records the fill only after that.</p>
           </div>
           <Link href="/risk-disclosure" className="inline-flex w-fit items-center gap-3 rounded-full bg-white px-6 py-3 text-sm font-semibold text-black transition-colors hover:bg-white/80">
             Read the risk disclosure <ArrowUpRight size={16} />

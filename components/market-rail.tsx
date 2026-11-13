@@ -102,7 +102,7 @@ const stories = [
   },
   {
     label: "Settlement",
-    caption: "The desk prepares the order. You sign it on devnet. The program checks the price before USDC moves.",
+    caption: "The desk prepares the order. You sign it on mainnet. The program checks the price before USDC moves.",
     card: (
       <div className="relative aspect-square overflow-hidden bg-[#071433]">
         <div className="absolute -right-10 -top-16 h-[80%] w-[80%] rounded-full bg-[radial-gradient(circle,#2f7cf6_0%,rgba(47,124,246,0)_70%)]" />

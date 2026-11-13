@@ -15,7 +15,7 @@ export default function Footer() {
             <span>lokgi</span>
           </span>
         </Link>
-        <p className="mt-8 max-w-xl text-lg leading-8 text-white/60">Lokgi is a reference desk for US-listed companies. Settlement is on Solana devnet. A claim is frozen USDC in the vault, priced off the official close, and it is not a share of the company.</p>
+        <p className="mt-8 max-w-xl text-lg leading-8 text-white/60">Lokgi is a reference desk for US-listed companies. Settlement is on Solana mainnet. A claim is frozen USDC in the vault, priced off the official close, and it is not a share of the company.</p>
 
         <div className="mt-20 flex flex-col gap-6 border-t border-white/20 py-8 text-base text-white/65 md:mt-28 md:flex-row md:items-center md:justify-between">
           <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
@@ -27,7 +27,7 @@ export default function Footer() {
             <Link href="/risk-disclosure" className="transition-colors hover:text-white">Risk Disclosure</Link>
           </div>
 
-          <p className="max-w-2xl text-sm leading-6 text-white/45">Lokgi is not a broker, exchange, custodian, or adviser. Trades use devnet USDC. A claim pays no dividend, carries no vote, and gives no right to the stock. Read the Terms and the Risk Disclosure before you use the desk.</p>
+          <p className="max-w-2xl text-sm leading-6 text-white/45">Lokgi is not a broker, exchange, custodian, or adviser. Trades use mainnet USDC. A claim pays no dividend, carries no vote, and gives no right to the stock. Read the Terms and the Risk Disclosure before you use the desk.</p>
 
           <div className="flex items-center gap-6 text-white/75">
             <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="lokgi on X" className="text-xl transition-colors hover:text-white">𝕏</a>

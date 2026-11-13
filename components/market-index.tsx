@@ -79,7 +79,7 @@ export default function MarketIndex() {
             <div className="relative z-10 flex h-full flex-col p-1">
               <div className="flex items-start justify-between gap-6">
                 <h2 className="max-w-xl text-4xl font-medium leading-[1.02] tracking-[-0.04em] md:text-5xl lg:text-6xl">
-                  The close,<br />then the claim.<br />On devnet.
+                  The close,<br />then the claim.<br />On mainnet.
                 </h2>
                 <span className="hidden whitespace-nowrap text-right text-sm font-semibold uppercase tracking-[0.14em] text-white/50 sm:block">Lokgi<br />Markets</span>
               </div>

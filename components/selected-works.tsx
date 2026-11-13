@@ -11,9 +11,9 @@ const panels = [
     href: "/docs/market",
   },
   {
-    title: "Settle on Solana devnet",
-    eyebrow: "DEVNET USDC · WALLET SIGNED",
-    body: "You sign in with email, connect a Solana wallet, and sign a message that only proves you control it. A trade is a separate signature. Devnet USDC moves into the vault or back out. There is no mainnet program in this product.",
+    title: "Settle on Solana mainnet",
+    eyebrow: "MAINNET USDC · WALLET SIGNED",
+    body: "You sign in with email, connect a Solana wallet, and sign a message that only proves you control it. A trade is a separate signature. USDC moves into the vault or back out on mainnet.",
     href: "/docs/settlement",
   },
   {

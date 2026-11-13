@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<Params> }) 
 export default async function DocsPage({ params }: { params: Promise<Params> }) {
   const { slug = [] } = await params
   const key = slug.join("/")
-  if (key === "demo") redirect("/docs/devnet")
+  if (key === "demo" || key === "devnet") redirect("/docs/mainnet")
   const doc = getDoc(key)
   if (!doc) notFound()
   const { prev, next } = docNeighbors(key)

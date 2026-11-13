@@ -36,7 +36,7 @@ const slides = [
     title: "Signed by your wallet.",
     points: [
       "The desk builds the transaction. Your wallet signs and sends it.",
-      "The program checks the signed price before it moves devnet USDC.",
+      "The program checks the signed price before it moves mainnet USDC.",
       "A buy mints a frozen claim. A sell burns it and returns USDC.",
     ],
     cta: "See the flow",
