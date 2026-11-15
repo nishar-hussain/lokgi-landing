@@ -5,59 +5,66 @@ import { Check, Info } from "lucide-react"
 
 const scenes = [
   {
-    id: "vault",
-    status: "Vault settlement",
-    action: "Buy claim",
-    note: "USDC moves into the vault and a claim is minted.",
+    id: "lookup",
+    status: "Last official close",
+    ticker: "AAPL",
+    name: "Apple",
+    price: "$198.42",
+    note: "The listing shows the latest completed US session, 9:30 to 16:00 New York.",
+    action: "Open listing",
+    fee: "US session",
+    payLabel: "Session",
+    pay: "9:30–16:00",
+    receiveLabel: "On screen",
+    receive: "Official close",
+    chart: "0,58 28,54 52,50 80,46 108,40 136,36 164,30 192,26 220,20 240,16",
+    button: "View the close",
+    steps: [
+      { label: "Close is labelled", done: true },
+      { label: "Chart is the US listing", done: true },
+      { label: "A trade here does not move it", done: true },
+    ],
+  },
+  {
+    id: "mint",
+    status: "Claim minted",
+    ticker: "AAPL",
+    name: "Apple",
+    price: "0.504 AAPL",
+    note: "USDC is in the vault. The frozen claim is in your wallet.",
+    action: "Buy filled",
+    fee: "0.10% fee",
+    payLabel: "Vault in",
     pay: "100 USDC",
+    receiveLabel: "Minted",
     receive: "0.504 AAPL",
     chart: "0,46 22,42 40,48 58,34 78,38 96,22 118,28 136,16 158,24 176,12 198,18 220,8 240,14",
+    button: "Holding updated",
     steps: [
-      { label: "USDC sent to vault", done: true },
-      { label: "Claim minted on Solana", done: true },
-      { label: "Held in your wallet", done: true },
-    ],
-  },
-  {
-    id: "pricing",
-    status: "Official close",
-    action: "Review price",
-    note: "Order price is the latest official US market close.",
-    pay: "Close $198.42",
-    receive: "Locked quote",
-    chart: "0,40 24,40 48,28 72,28 96,18 120,18 144,30 168,30 192,14 216,14 240,22",
-    steps: [
-      { label: "US close ingested", done: true },
-      { label: "Price locked at $198.42", done: true },
-      { label: "Shown before signing", done: false },
-    ],
-  },
-  {
-    id: "frozen",
-    status: "Frozen",
-    action: "Hold claim",
-    note: "The claim cannot be transferred to another wallet.",
-    pay: "0.504 AAPL",
-    receive: "Non-transferable",
-    chart: "0,24 30,24 50,36 80,36 110,20 140,20 170,32 200,32 240,18",
-    steps: [
-      { label: "Transfer blocked", done: true },
-      { label: "Wallet-bound claim", done: true },
-      { label: "Sell burns back to USDC", done: false },
+      { label: "USDC entered the vault", done: true },
+      { label: "Claim minted, frozen", done: true },
+      { label: "Booked after the chain", done: true },
     ],
   },
   {
     id: "rights",
     status: "Not a share",
+    ticker: "AAPL",
+    name: "Apple",
+    price: "$198.42",
+    note: "No company ownership, no vote, no dividend, and no right to the stock.",
     action: "Claim only",
-    note: "No company ownership, voting rights, or dividends.",
-    pay: "Price-linked",
-    receive: "Vault claim",
+    fee: "No dividend",
+    payLabel: "You hold",
+    pay: "The claim",
+    receiveLabel: "Outside",
+    receive: "The stock",
     chart: "0,50 28,44 56,48 84,36 112,40 140,26 168,30 196,16 224,20 240,12",
+    button: "Read the risks",
     steps: [
       { label: "No voting rights", done: true },
       { label: "No dividends", done: true },
-      { label: "Price-linked claim only", done: true },
+      { label: "No Nasdaq or NYSE print", done: true },
     ],
   },
 ]
@@ -76,6 +83,12 @@ function SolanaMark({ className, id }: { className?: string; id: string }) {
       <path fill={`url(#${id})`} d="M333.1 120.1c-2.4-2.4-5.7-3.8-9.2-3.8H6.5c-5.8 0-8.7 7-4.6 11.1l62.7 62.7c2.4 2.4 5.7 3.8 9.2 3.8h317.4c5.8 0 8.7-7 4.6-11.1l-62.7-62.7z" />
     </svg>
   )
+}
+
+function sceneIndex(position: number) {
+  const last = scenes.length - 1
+  if (position <= 0) return 0
+  return Math.min(last, Math.floor((position / last) * scenes.length))
 }
 
 export default function About() {
@@ -120,17 +133,20 @@ export default function About() {
     }
   }, [])
 
+  const active = sceneIndex(visual)
+  const scene = scenes[active]
+
   return (
-    <section ref={sectionRef} id="about" className="relative h-[420vh]">
-      <div className="sticky top-0 flex h-svh items-center overflow-hidden px-6 pb-8 pt-20">
+    <section ref={sectionRef} id="about" className="relative h-[340vh] max-lg:h-[300vh]">
+      <div className="sticky top-0 flex h-svh flex-col overflow-hidden px-6 pb-6 pt-20">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 bg-[linear-gradient(to_right,rgba(0,0,0,0.045)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.045)_1px,transparent_1px)] bg-[size:28px_28px] lg:block"
         />
 
-        <div className="relative mx-auto grid w-full max-w-7xl items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
-          <div>
-            <div className="mb-6 flex items-center gap-2">
+        <div className="relative mx-auto grid min-h-0 w-full max-w-7xl flex-1 grid-rows-[auto_minmax(0,1fr)] items-center gap-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:grid-rows-none lg:gap-16">
+          <div className="min-w-0">
+            <div className="mb-4 flex items-center gap-2 lg:mb-6">
               <Info className="h-5 w-5 text-accent" strokeWidth={2} />
               <span className="text-sm font-medium text-foreground/70">ASSET STRUCTURE</span>
             </div>
@@ -139,26 +155,31 @@ export default function About() {
               Know exactly what you hold.
             </h2>
 
-            <p className="mt-5 max-w-xl text-foreground/70">
+            <p className="mt-4 max-w-xl text-foreground/70 lg:mt-5">
               A Lokgi claim records USDC in the vault against that name, at the close used for the order. The token stays frozen in the wallet that holds it.
             </p>
 
-            <div className="mt-8 flex items-center gap-2" aria-hidden="true">
-              {scenes.map((scene, index) => {
-                const proximity = Math.max(0, 1 - Math.abs(visual - index))
-                return (
-                  <span
-                    key={scene.id}
-                    className="h-1 rounded-full bg-foreground/15"
-                    style={{ width: 16 + proximity * 16, backgroundColor: `rgba(0,0,0,${0.15 + proximity * 0.85})` }}
-                  />
-                )
-              })}
+            <div key={scene.id} className="screen-in mt-5 max-w-xl border-l-2 border-foreground pl-4" aria-live="polite">
+              <p className="text-sm font-medium text-foreground">{scene.status}</p>
+              <p className="mt-1 text-sm leading-6 text-foreground/70">{scene.note}</p>
+            </div>
+
+            <div className="mt-5 flex items-center gap-2" aria-hidden="true">
+              {scenes.map((item, index) => (
+                <span
+                  key={item.id}
+                  className="h-1 rounded-full bg-foreground/15 transition-[width,background-color] duration-300"
+                  style={{
+                    width: index === active ? 32 : 16,
+                    backgroundColor: index === active ? "#111" : "rgba(0,0,0,0.15)",
+                  }}
+                />
+              ))}
             </div>
           </div>
 
-          <div className="flex justify-center lg:pr-2">
-            <div className="phone-float relative aspect-[418/850] h-[min(70svh,640px)] w-auto drop-shadow-[0_28px_50px_rgba(0,0,0,0.18)]">
+          <div className="flex h-full min-h-0 items-end justify-center overflow-hidden lg:items-center lg:pr-2">
+            <div className="phone-float relative aspect-[418/850] h-full max-h-full w-auto drop-shadow-[0_28px_50px_rgba(0,0,0,0.18)] lg:max-h-[min(70svh,640px)]">
               <img
                 src="/images/iphone-frame.png"
                 alt=""
@@ -179,78 +200,66 @@ export default function About() {
                     </span>
                   </div>
 
-                  <div className="relative mt-2.5 min-h-0 flex-1 overflow-hidden">
-                    {scenes.map((scene, index) => {
-                      const opacity = Math.max(0, 1 - Math.abs(visual - index))
-                      return (
-                      <div
-                        key={scene.id}
-                        className={`absolute inset-0 flex flex-col ${opacity < 0.5 ? "pointer-events-none" : ""}`}
-                        style={{ opacity }}
-                        aria-hidden={opacity < 0.5}
-                      >
-                        <div className="flex items-center justify-between gap-2">
-                          <p className="text-[11px] font-medium text-foreground/45">AAPL · Apple</p>
-                          <span className="shrink-0 whitespace-nowrap rounded-full bg-[#14F195]/20 px-1.5 py-1 text-[9px] font-semibold leading-none text-[#0a7a4b]">
-                            {scene.status}
-                          </span>
-                        </div>
-                        <p className="mt-0.5 text-[22px] font-semibold leading-none tracking-tight text-foreground">$198.42</p>
-                        <p className="mt-1 text-[10px] leading-[1.35] text-foreground/45">{scene.note}</p>
+                  <div key={scene.id} className="screen-in mt-2.5 flex min-h-0 flex-1 flex-col overflow-hidden">
+                    <div className="flex shrink-0 items-center justify-between gap-2">
+                      <p className="min-w-0 truncate text-[11px] font-medium text-foreground/45">{scene.ticker} · {scene.name}</p>
+                      <span className="shrink-0 whitespace-nowrap rounded-full bg-[#14F195]/20 px-1.5 py-1 text-[9px] font-semibold leading-none text-[#0a7a4b]">
+                        {scene.status}
+                      </span>
+                    </div>
+                    <p className="mt-0.5 shrink-0 truncate text-[22px] font-semibold leading-none tracking-tight text-foreground">{scene.price}</p>
+                    <p className="mt-1 line-clamp-2 shrink-0 text-[10px] leading-[1.35] text-foreground/45">{scene.note}</p>
 
-                        <svg viewBox="0 0 240 72" className="mt-2 h-16 w-full shrink-0" aria-hidden="true">
-                          <polyline
-                            fill="none"
-                            stroke="#111"
-                            strokeWidth="2"
-                            strokeLinejoin="round"
-                            strokeLinecap="round"
-                            points={scene.chart}
-                          />
-                        </svg>
+                    <svg viewBox="0 0 240 72" className="mt-2 h-14 w-full shrink-0 sm:h-16" aria-hidden="true">
+                      <polyline
+                        fill="none"
+                        stroke="#111"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                        strokeLinecap="round"
+                        points={scene.chart}
+                      />
+                    </svg>
 
-                        <div className="mt-1 rounded-2xl bg-white p-2 shadow-sm ring-1 ring-black/5">
-                          <div className="mb-1.5 flex items-center justify-between gap-2">
-                            <p className="text-[12px] font-semibold leading-none text-foreground">{scene.action}</p>
-                            <span className="shrink-0 text-[10px] text-foreground/40">0.10% fee</span>
-                          </div>
-                          <div className="grid grid-cols-2 gap-1.5 text-[10px]">
-                            <div className="min-w-0 rounded-xl bg-[#f4f4f2] px-1 py-1.5">
-                              <p className="text-[8px] uppercase tracking-wide text-foreground/40">You pay</p>
-                              <p className="mt-0.5 font-semibold leading-tight text-foreground">{scene.pay}</p>
-                            </div>
-                            <div className="min-w-0 rounded-xl bg-[#f4f4f2] px-1 py-1.5">
-                              <p className="text-[8px] uppercase tracking-wide text-foreground/40">You receive</p>
-                              <p className="mt-0.5 font-semibold leading-tight text-foreground">{scene.receive}</p>
-                            </div>
-                          </div>
-                        </div>
-
-                        <ul className="mt-3 space-y-1.5 px-0.5">
-                          {scene.steps.map((step) => (
-                            <li key={step.label} className="flex items-center gap-2">
-                              <span
-                                className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full ${
-                                  step.done ? "bg-black text-white" : "border border-foreground/25"
-                                }`}
-                              >
-                                {step.done ? <Check className="h-2 w-2" strokeWidth={3} /> : null}
-                              </span>
-                              <span className={`text-[10px] leading-tight ${step.done ? "text-foreground" : "text-foreground/40"}`}>
-                                {step.label}
-                              </span>
-                            </li>
-                          ))}
-                        </ul>
+                    <div className="mt-1 shrink-0 rounded-2xl bg-white p-2 shadow-sm ring-1 ring-black/5">
+                      <div className="mb-1.5 flex items-center justify-between gap-2">
+                        <p className="min-w-0 truncate text-[12px] font-semibold leading-none text-foreground">{scene.action}</p>
+                        <span className="shrink-0 text-[10px] text-foreground/40">{scene.fee}</span>
                       </div>
-                      )
-                    })}
+                      <div className="grid grid-cols-2 gap-1.5 text-[10px]">
+                        <div className="min-w-0 rounded-xl bg-[#f4f4f2] px-1.5 py-1.5">
+                          <p className="text-[8px] uppercase tracking-wide text-foreground/40">{scene.payLabel}</p>
+                          <p className="mt-0.5 truncate font-semibold leading-tight text-foreground">{scene.pay}</p>
+                        </div>
+                        <div className="min-w-0 rounded-xl bg-[#f4f4f2] px-1.5 py-1.5">
+                          <p className="text-[8px] uppercase tracking-wide text-foreground/40">{scene.receiveLabel}</p>
+                          <p className="mt-0.5 truncate font-semibold leading-tight text-foreground">{scene.receive}</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <ul className="mt-auto shrink-0 space-y-1.5 px-0.5 pt-3">
+                      {scene.steps.map((step) => (
+                        <li key={step.label} className="flex items-center gap-2">
+                          <span
+                            className={`flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full ${
+                              step.done ? "bg-black text-white" : "border border-foreground/25"
+                            }`}
+                          >
+                            {step.done ? <Check className="h-2 w-2" strokeWidth={3} /> : null}
+                          </span>
+                          <span className={`text-[10px] leading-tight ${step.done ? "text-foreground" : "text-foreground/40"}`}>
+                            {step.label}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
 
                   <div className="shrink-0 bg-white pb-3 pt-1.5">
                     <div className="sign-pulse flex items-center justify-center gap-1.5 rounded-full bg-black px-3 py-2.5 text-[11px] font-medium leading-none text-white">
                       <SolanaMark id="lokgi-solana-sign" className="h-3.5 w-3.5 shrink-0" />
-                      Sign on Solana
+                      <span key={scene.id} className="truncate">{scene.button}</span>
                     </div>
                   </div>
                 </div>

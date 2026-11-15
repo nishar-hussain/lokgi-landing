@@ -53,7 +53,6 @@ export default function Header() {
     { name: "HOW IT WORKS", href: "#services" },
     { name: "SOLANA", href: "#about" },
     { name: "FAQ", href: "#questions" },
-    { name: "STAKE", href: "/stake" },
     { name: "DOCS", href: "/docs", blank: true },
   ]
 
@@ -123,7 +122,13 @@ export default function Header() {
           </a>
 
           {/* Mobile Menu Button */}
-          <button className="lg:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button
+            type="button"
+            className="-mr-2 inline-flex h-11 w-11 items-center justify-center lg:hidden"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
             {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
