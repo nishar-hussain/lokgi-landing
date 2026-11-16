@@ -67,12 +67,16 @@ export default function LitepaperPage() {
           <p className="mt-8 text-lg leading-8 text-foreground/70">
             Lokgi shows the latest official close of a US listing and lets a signed-in account buy or sell a frozen claim on a USDC vault. The claim records USDC held against that name at the close used for the order. It is not a share of the company.
           </p>
-          <p className="mt-8 border-t border-black/10 pt-4 text-sm text-foreground/50">Version 1.0 · Solana mainnet · USDC · Mainnet SOL for the network fee</p>
+          <p className="mt-8 border-t border-black/10 pt-4 text-sm text-foreground/50">Version 1.1 · Reviewed 16 November 2026 · Solana mainnet · USDC</p>
+
+          <p className="mt-4 text-sm leading-6 text-foreground/60">
+            The platform record dated 16 November 2026 reports initialized mainnet accounts and all 105 claim mints. Hosted deployment and a wallet-approved buy/sell with history verification remain pending. <Link href="/docs/status" className="underline underline-offset-4">Read the recorded platform status</Link>.
+          </p>
 
           <section className="mt-10 rounded-2xl border border-black/10 p-6 md:p-8">
             <p className="text-xs font-medium uppercase tracking-[0.16em] text-foreground/45">Abstract</p>
             <p className="mt-4 text-base leading-7 text-foreground/75">
-              The desk prices an order from the latest completed US regular-session close. Amounts are integers of micro-units, six decimal places, and the remainder is truncated, not rounded up. The fee is 10 basis points of the notional. A displayed price more than 100 basis points from the signed server price is rejected. The preview lasts 60 seconds. After the wallet signs, the program checks that signature before USDC moves. A buy mints a frozen claim. A sell burns it and returns USDC. The book records the fill only after the landed transaction has been read back.
+              The desk prices an order from the latest completed US regular-session close. Amounts are integers of micro-units, six decimal places, and the remainder is truncated, not rounded up. The fee is 10 basis points of the total buy debit or the gross sell value. A displayed price more than 100 basis points from the signed server price is rejected. The preview lasts 60 seconds. After the wallet signs, the program checks that signature before USDC moves. A buy mints a frozen claim. A sell burns it and returns USDC. The book records the fill only after the landed transaction has been read back.
             </p>
           </section>
 
@@ -81,14 +85,14 @@ export default function LitepaperPage() {
             <div className="mt-6 space-y-5 text-base leading-7 text-foreground/75">
               <p>A US listing has a close. A chart of that close is not a trade. People still want a way to take a price-linked position without being told they bought the stock.</p>
               <p>Lokgi keeps those two things apart. The page is a reference listing: the name, the close, the session, and a chart of the US market in New York time. An order, when one is offered, does not print on Nasdaq or the NYSE, and it does not move that chart. The thing that changes hands is USDC in a program vault, and a frozen token that records the claim.</p>
-              <p>More than 100 names have a mint and an order ticket. The rest of the US directory can be searched. A reference listing has a price and a chart, and nothing to buy, because no claim exists for it yet.</p>
+              <p>The catalog contains 105 supported claim types with initialized mainnet mints. Hosted trading verification remains pending in the platform record. The rest of the US directory can be searched. A reference listing has a price and a chart, and nothing to buy, because no claim exists for it yet.</p>
             </div>
           </section>
 
           <section id="claim" className="scroll-mt-24 mt-16">
             <h2 className="text-2xl font-medium tracking-[-0.04em]"><span className="mr-3 text-foreground/35">02</span>The claim</h2>
             <div className="mt-6 space-y-5 text-base leading-7 text-foreground/75">
-              <p>A Lokgi claim is a record that the vault holds USDC against a ticker, at the close used for that order. The token is frozen in the wallet that holds it. It cannot be sent onward. There is no secondary market in the token. The exit is a sell: the program burns the claim and returns USDC from the vault.</p>
+              <p>A Lokgi claim is a record that the vault holds USDC against a ticker, at the close used for that order. The token is frozen in the wallet that holds it. It cannot be sent onward. There is no secondary market in the token. The exit is a sell: the program burns the claim and returns USDC from the vault, subject to program checks and sufficient vault liquidity. A later price increase does not add USDC to the vault, and initialization alone does not demonstrate sufficient reserves.</p>
               <p>The holder does not receive a share of Apple, Microsoft, or any other company. A claim pays no dividend, carries no vote, and gives no right to the underlying stock. Lokgi is not a broker, an exchange, a custodian, or an adviser.</p>
             </div>
           </section>
@@ -120,7 +124,7 @@ export default function LitepaperPage() {
             <h2 className="text-2xl font-medium tracking-[-0.04em]"><span className="mr-3 text-foreground/35">04</span>The close</h2>
             <div className="mt-6 space-y-5 text-base leading-7 text-foreground/75">
               <p>Prices come from Massive’s aggregates: the latest completed US regular session, 9:30 to 16:00 New York time, including holidays and early closes. A fresh close is labelled as the last official close. A live price is shown only when a plan includes the real-time snapshot, and the screen says so.</p>
-              <p>If Massive does not answer, the desk keeps the last close it stored and marks it stale. The dollar price and the saved trend stay. The percent move is replaced with “Change unavailable.” A stale price, or one older than a few days, is refused for an order. If the price key is missing, the desk does not invent a market. A labelled sample feed is shown only when that mode is on.</p>
+              <p>If Massive does not answer, the desk keeps the last close it stored and marks it stale. The dollar price and the saved trend stay. The percent move is replaced with “Change unavailable.” A stale price, or one more than five days old, is refused for an order. If the price key is missing, the desk does not invent a market. A labelled sample feed is shown only when that mode is on.</p>
             </div>
           </section>
 
@@ -130,14 +134,14 @@ export default function LitepaperPage() {
               <p>The server signs the close with a key that never leaves the server. The browser cannot pick a price. Let p be the signed server price and p_s the price on the screen, both in the same units. The order is rejected when the gap is more than 100 basis points:</p>
             </div>
             <Eq kicker="Equation 1. Price band" lines={["reject when   |p_s − p| / p  >  1/100"]} />
-            <p className="text-base leading-7 text-foreground/75">In integers, with both prices in micro-USDC per whole token, that test is |p_s − p| · 100 &gt; p. The signed preview is valid for 60 seconds. After that, the desk will not build the transaction from it.</p>
+            <p className="text-base leading-7 text-foreground/75">In integers, with both prices in micro-USDC per whole token, that test is |p_s − p| · 100 &gt; p. The signed preview is valid for 60 seconds. After that, request a new preview; the program rejects an expired signed price.</p>
           </section>
 
           <section id="fee" className="scroll-mt-24 mt-16">
             <h2 className="text-2xl font-medium tracking-[-0.04em]"><span className="mr-3 text-foreground/35">06</span>Fee and quantity</h2>
             <div className="mt-6 space-y-5 text-base leading-7 text-foreground/75">
               <p>USDC amounts and claim quantities are integers of micro-units. One USDC is 1,000,000 micro-USDC. One whole claim token is 1,000,000 micro-tokens. Division that does not land on an integer is truncated. The result is never rounded up. In the equations, floor means that truncation.</p>
-              <p>The fee is 10 basis points, 0.10 percent, of the order notional. The Solana network fee is paid in SOL by the wallet. It is not part of this fee.</p>
+              <p>The fee is 10 basis points, 0.10 percent, of the full debit on a buy or the gross value on a sell. It stays in the vault. The Solana network fee is paid in SOL by the wallet. It is not part of this fee.</p>
             </div>
             <Eq
               kicker="Equation 2. Fee"
@@ -243,7 +247,7 @@ export default function LitepaperPage() {
           <section id="holdings" className="scroll-mt-24 mt-16">
             <h2 className="text-2xl font-medium tracking-[-0.04em]"><span className="mr-3 text-foreground/35">10</span>Holdings</h2>
             <div className="mt-6 space-y-5 text-base leading-7 text-foreground/75">
-              <p>Cash on the portfolio is the USDC in the connected wallet. A position stores quantity q and cost basis C, in micro-USDC, from the buy that minted it. For the worked buy, C is the 100 USDC that left the wallet.</p>
+              <p>Cash on the portfolio is the USDC in the linked wallet. A position stores quantity q and cost basis C, in micro-USDC, from the buy that minted it. For the worked buy, C is the 100 USDC that left the wallet.</p>
             </div>
             <Eq
               kicker="Equation 7. Mark and unrealized result"
@@ -253,7 +257,7 @@ export default function LitepaperPage() {
               ]}
             />
             <p className="text-base leading-7 text-foreground/75">At the same close, V = 99,899,906 micro-USDC and C = 100,000,000, so U = −100,094. That loss is the 100,000 micro-USDC fee plus the 94 micro-USDC that truncation did not mint. Nothing in the market moved.</p>
-            <p className="mt-5 text-base leading-7 text-foreground/75">Selling the whole position uses Equation 4. The notional is 99,899,906, the fee is floor(99,899,906 / 1000) = 99,899, and the USDC returned is 99,800,007. Against a cost of 100,000,000, the realized result is −199,993 micro-USDC: both fees, and the truncated remainder. Realized results elsewhere come from booked sells the same way. The first visit of a UTC day stores an equity snapshot. History can be filtered and exported.</p>
+            <p className="mt-5 text-base leading-7 text-foreground/75">Selling the whole position uses Equation 4. The notional is 99,899,906, the fee is floor(99,899,906 / 1000) = 99,899, and the USDC returned is 99,800,007. Against a cost of 100,000,000, the realized result is −199,993 micro-USDC: both fees, and the truncated remainder. Realized results elsewhere come from booked sells the same way. The first successful account read of a UTC day stores an equity snapshot when the required quotes are available and not stale. History supports side and symbol filters, pagination, and CSV export of up to the latest 5,000 rows across all filters.</p>
           </section>
 
           <section id="scope" className="scroll-mt-24 mt-16">
@@ -269,6 +273,8 @@ export default function LitepaperPage() {
             <p className="mt-6 text-base leading-7 text-foreground/75">The same rules, written as operating notes:</p>
             <ol className="mt-4 divide-y divide-black/10 rounded-2xl border border-black/10">
               {[
+                ["/docs/status", "Platform status", "Recorded mainnet setup and pending hosted trading verification."],
+                ["/docs/supported-assets", "Supported claims", "The 105 supported symbols by sector."],
                 ["/docs/market", "The market", "Which names have a ticket, and which are reference only."],
                 ["/docs/official-close", "Official close", "Where the price comes from, and what a stale quote looks like."],
                 ["/docs/quotes", "Quotes, fees, and limits", "10 basis points, the size caps, and the 60-second preview."],

@@ -51,7 +51,7 @@ export default function DocsShell({ children }: { children: React.ReactNode }) {
             <span className="flex-1 text-left">Search...</span>
             <kbd className="hidden rounded border border-white/15 px-1.5 text-[10px] text-white/50 sm:inline">⌘K</kbd>
           </button>
-          <Link href="/docs/risks" className="hidden text-sm text-white/70 hover:text-white sm:inline">
+          <Link href="/docs/troubleshooting" className="hidden text-sm text-white/70 hover:text-white sm:inline">
             Support
           </Link>
         </div>

@@ -53,7 +53,7 @@ export default function DocArticle({
                 {section.blocks.map((block, index) => {
                   if (block.type === "p") {
                     return (
-                      <p key={index} className="text-base leading-7 text-white/70">
+                      <p key={index} className="break-words text-base leading-7 text-white/70">
                         {block.text}
                       </p>
                     )
@@ -68,7 +68,7 @@ export default function DocArticle({
                   }
                   if (block.type === "ul") {
                     return (
-                      <ul key={index} className="list-disc space-y-2 pl-5 text-base leading-7 text-white/70">
+                      <ul key={index} className="list-disc space-y-2 break-words pl-5 text-base leading-7 text-white/70">
                         {block.items.map((item) => (
                           <li key={item}>{item}</li>
                         ))}
