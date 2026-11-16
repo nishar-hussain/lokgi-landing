@@ -30,13 +30,13 @@ export default function Footer() {
           <p className="max-w-2xl text-sm leading-6 text-white/45">Lokgi is not a broker, exchange, custodian, or adviser. Trades use mainnet USDC. A claim pays no dividend, carries no vote, and gives no right to the stock. Read the Terms and the Risk Disclosure before you use the desk.</p>
 
           <div className="flex items-center gap-6 text-white/75">
-            <a href="https://x.com" target="_blank" rel="noreferrer" aria-label="lokgi on X" className="text-xl transition-colors hover:text-white">𝕏</a>
+            <a href="https://x.com/Lokgihq" target="_blank" rel="noreferrer" aria-label="lokgi on X" className="text-xl transition-colors hover:text-white">𝕏</a>
             <a href="https://t.me" target="_blank" rel="noreferrer" aria-label="lokgi on Telegram" className="transition-colors hover:text-white">
               <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="currentColor">
                 <path d="M21.94 4.3 18.7 19.7c-.24 1.07-.88 1.33-1.78.83l-4.92-3.63-2.37 2.28c-.26.26-.48.48-.98.48l.35-4.97 9.05-8.18c.39-.35-.09-.54-.61-.19L6.2 13.3 1.4 11.8c-1.04-.33-1.06-1.04.22-1.54L20.5 2.7c.87-.32 1.63.21 1.44 1.6Z" />
               </svg>
             </a>
-            <a href="https://github.com" target="_blank" rel="noreferrer" aria-label="lokgi on GitHub" className="transition-colors hover:text-white"><Github size={21} /></a>
+            <a href="https://github.com/lokgi-hq" target="_blank" rel="noreferrer" aria-label="lokgi on GitHub" className="transition-colors hover:text-white"><Github size={21} /></a>
           </div>
         </div>
       </div>
