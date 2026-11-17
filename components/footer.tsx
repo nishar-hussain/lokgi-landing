@@ -1,42 +1,80 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Github } from "lucide-react"
+import { ArrowUpRight, BookOpen, Github, Landmark, LineChart, LockKeyhole, Play, Presentation, Send } from "lucide-react"
+
+const quickLinks = [
+  { label: "Docs", href: "/docs" },
+  { label: "Litepaper", href: "/litepaper" },
+]
+
+const legalLinks = [
+  { label: "Terms", href: "/terms" },
+  { label: "Privacy", href: "/privacy" },
+  { label: "Risk disclosure", href: "/risk-disclosure" },
+]
+
+const principles = [
+  { icon: LineChart, title: "US listings", detail: "Official market close" },
+  { icon: LockKeyhole, title: "Frozen claims", detail: "USDC held in a vault" },
+  { icon: Landmark, title: "Solana", detail: "Mainnet settlement" },
+]
 
 export default function Footer() {
   return (
-    <footer data-header="dark" className="bg-[#050505] text-white">
-      <div className="mx-auto max-w-[1600px] px-6 pt-20 md:px-10 md:pt-24">
-        <Link
-          href="/"
-          className="block overflow-visible text-[clamp(5.5rem,16vw,16rem)] font-medium leading-[0.85] tracking-[-0.06em] text-white transition-opacity hover:opacity-80"
-        >
-          <span className="flex items-center gap-6">
-            <Image src="/images/logsi-mark.jpeg" alt="lokgi mark" width={220} height={220} className="h-[clamp(4rem,8vw,9rem)] w-[clamp(4rem,8vw,9rem)] rounded-2xl object-contain invert" />
-            <span>lokgi</span>
-          </span>
-        </Link>
-        <p className="mt-8 max-w-xl text-lg leading-8 text-white/60">Lokgi is a reference desk for US-listed companies. Settlement is on Solana mainnet. A claim is frozen USDC in the vault, priced off the official close, and it is not a share of the company.</p>
-
-        <div className="mt-20 flex flex-col gap-6 border-t border-white/20 py-8 text-base text-white/65 md:mt-28 md:flex-row md:items-center md:justify-between">
-          <div className="flex flex-wrap items-center gap-x-8 gap-y-3">
-            <span>lokgi © 2026</span>
-            <Link href="/docs" target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-white">Docs</Link>
-            <Link href="/litepaper" className="transition-colors hover:text-white">Litepaper</Link>
-            <Link href="/terms" className="transition-colors hover:text-white">Terms of Service</Link>
-            <Link href="/privacy" className="transition-colors hover:text-white">Privacy Policy</Link>
-            <Link href="/risk-disclosure" className="transition-colors hover:text-white">Risk Disclosure</Link>
+    <footer data-header="dark" className="border-t border-white/10 bg-[#050505] text-white">
+      <div className="mx-auto max-w-[1720px] px-6 py-20 md:px-12 md:py-28">
+        <div className="grid gap-16 lg:grid-cols-[minmax(300px,0.8fr)_2fr] lg:gap-20">
+          <div>
+            <Link href="/" className="inline-flex items-center gap-3 transition-opacity hover:opacity-75">
+              <Image src="/images/logsi-mark.jpeg" alt="" width={64} height={64} className="h-16 w-16 rounded-2xl object-contain invert" />
+              <span className="text-3xl font-semibold tracking-[-0.04em]">lokgi</span>
+            </Link>
+            <p className="mt-6 max-w-md text-lg leading-8 text-white/55">
+              A reference desk for US-listed companies. See the official close and explore claims settled on Solana.
+            </p>
           </div>
 
-          <p className="max-w-2xl text-sm leading-6 text-white/45">Lokgi is not a broker, exchange, custodian, or adviser. Trades use mainnet USDC. A claim pays no dividend, carries no vote, and gives no right to the stock. Read the Terms and the Risk Disclosure before you use the desk.</p>
+          <div>
+            <p className="mb-5 text-base text-white/45">Explore</p>
+            <nav aria-label="Footer navigation" className="flex flex-wrap gap-2">
+              {quickLinks.map(({ label, href }) => {
+                const Icon = BookOpen
+                return (
+                  <Link key={label} href={href} className="inline-flex items-center gap-2 rounded-full bg-white/[0.07] px-5 py-3 text-base text-white/70 transition-colors hover:bg-white/[0.12] hover:text-white">
+                    <Icon size={17} />{label}
+                  </Link>
+                )
+              })}
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/[0.07] px-5 py-3 text-base text-white/70" aria-label="Pitch deck link coming soon">
+                <Presentation size={17} />Pitch deck
+              </span>
+              <a href="https://app.lokgi.com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white/[0.07] px-5 py-3 text-base text-white/70 transition-colors hover:bg-white/[0.12] hover:text-white"><Play size={17} />Demo <ArrowUpRight size={15} /></a>
+              <a href="https://x.com/Lokgihq" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white/[0.07] px-5 py-3 text-base text-white/70 transition-colors hover:bg-white/[0.12] hover:text-white"><span className="text-lg leading-none">𝕏</span>X <ArrowUpRight size={15} /></a>
+              <a href="https://t.me/lokgi_com" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white/[0.07] px-5 py-3 text-base text-white/70 transition-colors hover:bg-white/[0.12] hover:text-white"><Send size={16} />Telegram <ArrowUpRight size={15} /></a>
+              <a href="https://github.com/lokgi-hq" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white/[0.07] px-5 py-3 text-base text-white/70 transition-colors hover:bg-white/[0.12] hover:text-white"><Github size={17} />GitHub <ArrowUpRight size={15} /></a>
+            </nav>
 
-          <div className="flex items-center gap-6 text-white/75">
-            <a href="https://x.com/Lokgihq" target="_blank" rel="noreferrer" aria-label="lokgi on X" className="text-xl transition-colors hover:text-white">𝕏</a>
-            <a href="https://t.me/lokgi_com" target="_blank" rel="noreferrer" aria-label="lokgi on Telegram" className="transition-colors hover:text-white">
-              <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="currentColor">
-                <path d="M21.94 4.3 18.7 19.7c-.24 1.07-.88 1.33-1.78.83l-4.92-3.63-2.37 2.28c-.26.26-.48.48-.98.48l.35-4.97 9.05-8.18c.39-.35-.09-.54-.61-.19L6.2 13.3 1.4 11.8c-1.04-.33-1.06-1.04.22-1.54L20.5 2.7c.87-.32 1.63.21 1.44 1.6Z" />
-              </svg>
-            </a>
-            <a href="https://github.com/lokgi-hq" target="_blank" rel="noreferrer" aria-label="lokgi on GitHub" className="transition-colors hover:text-white"><Github size={21} /></a>
+            <p className="mb-5 mt-12 text-base text-white/45">The desk</p>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {principles.map(({ icon: Icon, title, detail }) => (
+                <div key={title} className="flex items-center gap-4 rounded-2xl border border-white/[0.08] p-5 md:p-6">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-white/[0.07] text-white/80"><Icon size={20} /></span>
+                  <span><span className="block text-base text-white/85">{title}</span><span className="mt-1 block text-sm text-white/45">{detail}</span></span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 border-t border-white/10 pt-6">
+          <p className="max-w-5xl text-xs leading-6 text-white/45">
+            Lokgi is not a broker, exchange, custodian, or adviser. A claim records USDC held in a vault against a name at the close used for the order. It is not a share, pays no dividend, carries no vote, and gives no right to the stock. Trades use Solana mainnet USDC. Review the risk disclosure before using the desk.
+          </p>
+          <div className="mt-7 flex flex-col gap-4 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
+            <span className="flex items-center gap-2">© 2026 Lokgi <span className="mx-1 text-white/20">·</span><Image src="/images/solana-logo.jpeg" alt="Solana" width={20} height={20} className="h-5 w-5 rounded-full object-cover" /> Mainnet Solana</span>
+            <nav aria-label="Legal links" className="flex flex-wrap gap-x-5 gap-y-2">
+              {legalLinks.map(({ label, href }) => <Link key={label} href={href} className="transition-colors hover:text-white/80">{label}</Link>)}
+            </nav>
           </div>
         </div>
       </div>

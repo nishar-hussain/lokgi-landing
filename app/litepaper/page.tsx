@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
+import { ArrowRight, Database, FileCheck2, Monitor, ShieldCheck } from "lucide-react"
 
 export const metadata: Metadata = {
   title: "Lokgi litepaper",
@@ -104,6 +105,26 @@ export default function LitepaperPage() {
               <p>After the code, the account connects Phantom or Solflare and signs a message that names the wallet and a one-time nonce. That signature does not move funds. One wallet is bound to one account. A trade is a separate signature. Lokgi does not ask for a seed phrase.</p>
               <p>Three records have different jobs. The chain is the source of truth for whether USDC moved. The book is written only after that movement has been read back and checked. The screen prepares an order the program will accept. It does not choose the price.</p>
             </div>
+            <figure className="mt-8 rounded-2xl border border-black/10 bg-white/60 p-5 md:p-7">
+              <p className="text-xs font-medium uppercase tracking-[0.14em] text-foreground/45">Order architecture</p>
+              <div className="mt-5 flex flex-col items-stretch gap-3 md:flex-row md:items-center md:gap-2">
+                {[
+                  { icon: Monitor, title: "Desk", detail: "Builds the order" },
+                  { icon: ShieldCheck, title: "Signed quote", detail: "Server price + 60s expiry" },
+                  { icon: Database, title: "Solana program", detail: "Moves USDC, mints or burns" },
+                  { icon: FileCheck2, title: "Verified book", detail: "Read back, then record once" },
+                ].map(({ icon: Icon, title, detail }, index, steps) => (
+                  <div key={title} className="contents">
+                    <div className="flex min-h-[104px] flex-1 items-center gap-3 rounded-xl border border-black/10 bg-background p-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-black/[0.04] text-foreground/70"><Icon size={19} /></span>
+                      <span><span className="block text-sm font-medium">{title}</span><span className="mt-1 block text-xs leading-5 text-foreground/55">{detail}</span></span>
+                    </div>
+                    {index < steps.length - 1 && <ArrowRight aria-hidden="true" className="mx-auto rotate-90 text-foreground/30 md:rotate-0" size={18} />}
+                  </div>
+                ))}
+              </div>
+              <figcaption className="mt-4 text-sm leading-6 text-foreground/50">The chain confirms settlement. Lokgi writes the fill to history only after it reads back and verifies the landed transaction.</figcaption>
+            </figure>
             <ol className="mt-8 divide-y divide-black/10 rounded-2xl border border-black/10">
               {[
                 ["I", "Desk", "Search, the stock page, the order ticket, the portfolio, and history."],
@@ -293,10 +314,31 @@ export default function LitepaperPage() {
                 </li>
               ))}
             </ol>
-            <p className="mt-10 border-t border-black/10 pt-6 text-sm leading-6 text-foreground/50">Last updated: November 15, 2026. This page is a product-content draft and is not legal advice.</p>
+          </section>
+
+          <section className="mt-20 border-t border-black/10 pt-10 md:mt-24 md:pt-12">
+            <h2 className="text-3xl font-medium tracking-[-0.04em] md:text-4xl">Explore Lokgi</h2>
+            <p className="mt-5 max-w-3xl text-lg leading-8 text-foreground/65">
+              Learn how the desk works, review the order and settlement details, or open Lokgi to explore US-listed companies.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <Link href="/docs" className="inline-flex min-h-14 items-center justify-center rounded-lg bg-[#080808] px-7 text-base font-medium text-white transition-colors hover:bg-black/80">
+                Read the Docs
+              </Link>
+              <a href="https://app.lokgi.com" target="_blank" rel="noopener noreferrer" className="inline-flex min-h-14 items-center justify-center rounded-lg border border-black/10 bg-background px-7 text-base font-medium text-foreground/75 transition-colors hover:border-black/25 hover:text-foreground">
+                Open App
+              </a>
+            </div>
           </section>
         </article>
       </div>
+
+      <footer className="border-t border-black/10">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-6 py-7 text-sm text-foreground/50 sm:flex-row sm:items-center sm:justify-between">
+          <Link href="/" className="font-medium uppercase tracking-[0.14em] text-foreground/55 hover:text-foreground">Lokgi</Link>
+          <p>A reference desk for US-listed companies, settled on Solana.</p>
+        </div>
+      </footer>
     </main>
   )
 }
